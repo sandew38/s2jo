@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- #26. mapper 기본설정 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!-- #27. 루트엘리먼트 & 네임스페이스 설정(프로젝트 전체 내에서 고유해야 한다.) --> 
+<mapper namespace="khx">
+
+
+	<!-- ==== #43. 메인페이지용 이미지 파일명 가져오기 
+	<select id = "getImgfilenameList" resultType="String">
+		select imgfilename
+		from spring_img_advertise
+		order by imgno desc	
+	</select>
+	-->
+	
+	<!-- ==== 열차 운행 정보 가져오기	 -->
+	<select id="trainList" resultType="com.s2jo.khx.model.TrainviewVO">
+		select trainno, traintype
+				, departure, departuretime
+				, arrival, arrivaltime, turnaroundtime
+				, perminuterate, rate
+		from trainview
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
