@@ -78,6 +78,15 @@
 			 <h4 style="font-weight: bold;">KHX 통합 예매</h4>
 	</div>
 
+	<div align="center">
+		<ul style="list-style: none;" >
+			<li>메뉴 1</li>
+			<li>메뉴 2</li>
+			<li>메뉴 3</li>
+			<li>메뉴 4</li>
+			<li>메뉴 5</li>
+		</ul>
+	</div>
 
 	<div style="margin: 0 auto;" align="center">
 		현재시각 :&nbsp; 
