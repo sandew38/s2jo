@@ -54,6 +54,7 @@
 		
 		<div id="myheader">
 			<tiles:insertAttribute name="header" />
+
 		</div>
 		
 		<div id="mycontent">

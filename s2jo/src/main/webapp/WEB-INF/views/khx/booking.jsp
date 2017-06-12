@@ -86,8 +86,7 @@ table tr td
 									<fmt:formatNumber pattern="###,###">
 										${train.rate}
 									</fmt:formatNumber> 원					
-								</td>
-							</li>						
+								</td>					
 						</c:forEach>
 					</c:if>
 					
