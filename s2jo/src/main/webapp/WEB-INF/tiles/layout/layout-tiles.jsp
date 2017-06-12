@@ -47,12 +47,13 @@
 
 <body>
 	<div id="mycontainer">
-		<div id="myheader">
-			<tiles:insertAttribute name="header" />
-		</div>
-	
+		
 		<div id="mysideinfo">
 			<tiles:insertAttribute name="sideinfo" />
+		</div>
+		
+		<div id="myheader">
+			<tiles:insertAttribute name="header" />
 		</div>
 		
 		<div id="mycontent">
