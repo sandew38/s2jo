@@ -18,7 +18,7 @@ table tr td
     
     
 <div style="width: 100%; height: 90%; " align="center">
-	<div id = "outer" style="width: 80%; height: 90%; border: 2px #1CE3A9 solid; " align="center">
+	<div id = "outer" style="width: 80%; height: 90%; border: 0px #1CE3A9 solid; " align="center">
 		<h3 style="font-weight: bold;">배차조회</h3>
 		
 		<div id = "infobox" style="float: left; border: 0px #1CE3A9 solid; width: 35%; height: 98%;" >
@@ -39,12 +39,19 @@ table tr td
 		</div>
 		
 		<div id = "detailbox" style="float: left; border: 1px #1CE3A9 solid; width: 65%; height: 98%;">
-			<div style="height: 20%; border: 1px #1CE3A9 solid;">
-				<h4>조회한 날짜</h4>
+			<div style="height: 20%; border-bottom : 1px #1CE3A9 solid;">
+				<div align="left">
+					<img src="<%=request.getContextPath()%>/resources/images/btn_refresh.png"
+								 style="width: 10%; padding: 2%; cursor: pointer;">
+				</div>
+				
+				<div>
+					<h4>조회한 날짜</h4>
+				</div>
 			</div>
-			<div style="max-height: 500px; overflow-y: auto; " align="left">
+			<div style="max-height: 500px; padding-top:2%; overflow-y: auto; " align="left">
 				<table style="width: 100%; text-align: center; " >
-					<tr>
+					<tr style="border-bottom: 1px #1CE3A9 solid;">
 						<th style="text-align: center;">분류</th>
 						<th style="text-align: center;">열차번호</th>
 						<th style="text-align: center;">출발지</th>
@@ -79,8 +86,7 @@ table tr td
 									<fmt:formatNumber pattern="###,###">
 										${train.rate}
 									</fmt:formatNumber> 원					
-								</td>
-							</li>						
+								</td>					
 						</c:forEach>
 					</c:if>
 					
