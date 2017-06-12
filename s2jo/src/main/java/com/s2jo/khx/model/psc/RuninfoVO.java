@@ -1,4 +1,4 @@
-package com.s2jo.khx.pscmodel;
+package com.s2jo.khx.model.psc;
 
 public class RuninfoVO {
 
