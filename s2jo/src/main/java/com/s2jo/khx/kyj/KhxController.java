@@ -1,5 +1,5 @@
 
-package com.s2jo.khx;
+package com.s2jo.khx.kyj;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.s2jo.khx.model.RuninfoVO;
-import com.s2jo.khx.model.TrainviewVO;
-import com.s2jo.khx.service.KhxService;
 import com.s2jo.khx.common.FileManager;
+import com.s2jo.khx.model.kyj.RuninfoVO;
+import com.s2jo.khx.model.kyj.TrainviewVO;
+import com.s2jo.khx.service.kyj.KhxService;
 
 import oracle.net.aso.b;
 

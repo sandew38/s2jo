@@ -1,4 +1,4 @@
-package com.s2jo.khx.model;
+package com.s2jo.khx.model.kyj;
 
 import java.util.HashMap;
 import java.util.List;

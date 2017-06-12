@@ -1,4 +1,4 @@
-package com.s2jo.khx;
+package com.s2jo.khx.kyj;
 
 import java.text.DateFormat;
 import java.util.Date;

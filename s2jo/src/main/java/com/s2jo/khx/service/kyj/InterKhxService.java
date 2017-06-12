@@ -1,12 +1,12 @@
-package com.s2jo.khx.service;
+package com.s2jo.khx.service.kyj;
 
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.aop.ThrowsAdvice;
 
-import com.s2jo.khx.model.RuninfoVO;
-import com.s2jo.khx.model.TrainviewVO;
+import com.s2jo.khx.model.kyj.RuninfoVO;
+import com.s2jo.khx.model.kyj.TrainviewVO;
 
 // Service 단 인터페이스 선언
 

@@ -1,4 +1,4 @@
-package com.s2jo.khx.service;
+package com.s2jo.khx.service.kyj;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.s2jo.khx.model.KhxDAO;
-import com.s2jo.khx.model.RuninfoVO;
-import com.s2jo.khx.model.TrainviewVO;
+import com.s2jo.khx.model.kyj.KhxDAO;
+import com.s2jo.khx.model.kyj.RuninfoVO;
+import com.s2jo.khx.model.kyj.TrainviewVO;
 
 //	==== #30. Service 선언 ====
 

@@ -19,7 +19,7 @@
   	#mycontainer	{ width:90%; margin:0 auto; padding:20px; }
 	#myheader		{ background-color:#1CE3A9; float:right; height:56px; width : 75%; padding: 10px; }
 	#mycontent		{ background-color:#FFFFFF; float:left; width:75%; min-height:800px;/*  padding-top: 40px; */ border:1px solid #1CE3A9;}
-	#mysideinfo		{ background-color:#F0FFFF; float:left; width:25%; min-height:800px; padding-top: 20px;}
+	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; min-height:800px; padding-top: 20px;}
 	#myfooter		{ background-color:#555555; clear:both; height:100px; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	
