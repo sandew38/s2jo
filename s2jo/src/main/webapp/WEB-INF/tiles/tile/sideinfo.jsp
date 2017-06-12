@@ -7,6 +7,12 @@
 
 <style type="text/css">
 	${demo.css}
+	
+	li 
+	{
+		padding-bottom: 8%;
+		font-size: large;
+	}
 </style>
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/highcharts.js"></script>        <!-- 차트그리기 --> 
@@ -69,7 +75,7 @@
 	
 </script>
 
-<div id = "outer">
+<div id = "outer" style=" margin-top: 56px;">
 
 	<div id = "logo" align="center" style="margin-top: 10%; margin-bottom: 10%;">
 		<img alt="khxlogo"
@@ -78,13 +84,13 @@
 			 <h4 style="font-weight: bold;">KHX 통합 예매</h4>
 	</div>
 
-	<div align="center">
-		<ul style="list-style: none;" >
-			<li>메뉴 1</li>
-			<li>메뉴 2</li>
-			<li>메뉴 3</li>
-			<li>메뉴 4</li>
-			<li>메뉴 5</li>
+	<div align="center" >
+		<ul style="list-style: none; margin-top: 30%; padding-bottom: 30%;" >
+			<li>기차예매</li>
+			<li>예매확인</li>
+			<li>운행정보</li>
+			<li>이용안내</li>
+			<li>고객센터</li>
 		</ul>
 	</div>
 
