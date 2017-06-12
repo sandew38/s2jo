@@ -14,6 +14,7 @@ function goBooking()
 <div align="center" style="/* border: solid red 1px; */">
 	<div align="center" style="width:90%; margin: 0 auto; margin-bottom: 40px; /* border: solid red 1px; */">
 		<h2>KHX와 함께 여행을 계획하세요!</h2>
+		여기 고침.
 	</div>
 	
 	<div style="width:100%; margin: 0 auto; /* border: solid red 1px; */">
