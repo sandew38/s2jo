@@ -1,4 +1,4 @@
-package com.s2jo.khx.lskmodel;
+package com.s2jo.khx.model.lsk;
 
 public class TrainviewVO {
 
