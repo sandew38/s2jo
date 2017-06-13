@@ -89,7 +89,7 @@
 			<li>운행정보</li>
 			<li>이용안내</li>
 			<li><a href="<%=request.getContextPath()%>/hjs/stationInfo.action">기차역정보</a></li>
-			<li>고객센터</li>
+			<li><a href="<%=request.getContextPath()%>/jsb/recommendList.action">고객센터</a></li>
 		</ul>
 	</div>
 	<div style="margin: 0 auto;" align="center">
