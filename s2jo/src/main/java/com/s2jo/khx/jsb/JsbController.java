@@ -1,6 +1,7 @@
 package com.s2jo.khx.jsb;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,9 +31,26 @@ public class JsbController {
 	public String recommendList(HttpServletRequest req)
 	{
 		
-		return "jsb/board/recommendList.tiles";
+		return "jsb/board/recommend/recommendList.tiles";
 //		└> /Board/src/main/webapp/WEB-INF/views/recommendList/khx.jsp 파일을 생성한다.
 		
 	} // end of public String recommendList(HttpServletRequest req) ----
+	
+	 @RequestMapping(value="/jsb/recommendAdd.action", method={RequestMethod.GET})
+	    public String add(HttpServletRequest req, HttpServletResponse res) { 
+	    	
+	    	// ===== # 119. 답변글쓰기 추가되었으므로 아래와 같이 한다. ===== 
+	    	String fk_seq = req.getParameter("fk_seq");
+	    	String groupno = req.getParameter("groupno"); 
+	    	String depthno = req.getParameter("depthno");
+	    	
+	    	req.setAttribute("fk_seq", fk_seq);
+	    	req.setAttribute("groupno", groupno);
+	    	req.setAttribute("depthno", depthno);
+	    	
+	    	return "jsb/board/recommend/recommendAdd.tiles";
+	    	// /Board/src/main/webapp/WEB-INF/views2/board/add.jsp 파일을 생성한다.
+	    }
+	    
 	
 }
