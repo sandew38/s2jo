@@ -85,11 +85,11 @@
 	<div align="center" >
 		<ul style="list-style: none; margin-top: 30%; padding-bottom: 30%;" >
 			<li>기차예매</li>
-			<li>예매확인</li>
+			<li><a href="<%=request.getContextPath()%>/lsk/bookingcheck.action">예매확인</a></li>
 			<li>운행정보</li>
 			<li>이용안내</li>
 			<li><a href="<%=request.getContextPath()%>/hjs/stationInfo.action">기차역정보</a></li>
-			<li>고객센터</li>
+			<li><a href="<%=request.getContextPath()%>/jsb/recommendList.action">고객센터</a></li>
 		</ul>
 	</div>
 	<div style="margin: 0 auto;" align="center">
