@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 
 table tr td
@@ -39,17 +44,17 @@ table tr td
 		</div>
 		
 		<div id = "detailbox" style="float: left; border: 1px #1CE3A9 solid; width: 65%; height: 98%;">
-			<div style="height: 20%; border-bottom : 1px #1CE3A9 solid;">
-				<div align="left">
+			<div style="height: 20%; width: 100%; float : left; border-bottom : 1px #1CE3A9 solid;">
+				<div align="left" style="float : left; width: 5%;">
 					<img src="<%=request.getContextPath()%>/resources/images/btn_refresh.png"
-								 style="width: 10%; padding: 2%; cursor: pointer;">
+						 style="width: 100%; padding: 2%; cursor: pointer;"> 
 				</div>
 				
-				<div>
+				<div style=" text-align: center; padding-right: 5%;" align="center">
 					<h4>조회한 날짜</h4>
 				</div>
 			</div>
-			<div style="max-height: 500px; padding-top:2%; overflow-y: auto; " align="left">
+			<div style="max-height: 500px; clear: both; padding-top:2%; overflow-y: auto; " align="left">
 				<table style="width: 100%; text-align: center; " >
 					<tr style="border-bottom: 1px #1CE3A9 solid;">
 						<th style="text-align: center;">분류</th>
