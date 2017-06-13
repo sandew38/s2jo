@@ -16,11 +16,11 @@
   <script type="text/javascript" src="<%=request.getContextPath() %>/resources/BootStrapStudy/js/bootstrap.js"></script>
   
   <style type="text/css">
-  	#mycontainer	{ width:90%; margin:0 auto; padding:20px; }
-	#myheader		{ background-color:#1CE3A9; float:right; height:56px; width : 75%; padding: 10px; }
-	#mycontent		{ background-color:#FFFFFF; float:left; width:75%; min-height:800px;/*  padding-top: 40px; */ border:1px solid #1CE3A9;}
-	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; min-height:856px; padding-top: 20px;}
-	#myfooter		{ background-color:#555555; clear:both; height:100px; }
+  	#mycontainer	{ width:100%; margin:0 auto; padding:20px; }
+	#myheader		{ background-color:#639EB0; float:right; height:20%; width :75%; padding: 10px;}
+	#mycontent		{ background-color:#FFFFFF; float:left; width:75%; min-height:800px;  padding-top: 40px; border:1px solid #1CE3A9;}
+	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; height:78%; padding-top: 10px;}
+	#myfooter		{ background-color:#000000; clear:both; height:20%; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	
 	#myheader a {text-decoration:none;}

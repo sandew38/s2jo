@@ -3,9 +3,49 @@
 
 <%-- ===== #39.  tiles 중 footer 페이지 만들기  ===== --%>
 
-<div align="center" style="color: #999999; padding: 7px;">
-(사)KH정보교육원  |  사업자등록번호 : 118-82-02004 <br/>
-강남지원 1관 : 서울특별시 강남구 역삼동 823-24 남도빌딩 2F, 3F, 4F | 강남지원 2관 : 서울특별시 강남구 역삼동 823-42 그랑프리 빌딩 3F, 4F, 5F, 7F <br/>
-당산지원 : 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F | 종로지원 : 서울특별시 중구 남대문로 120 대일빌딩 2F<br/>
-Copyright © 1998-2016 KH Information Educational Institute All Right Reserved
-</div>
+
+
+<form style="height: 100%;">
+	<div>
+		<table align="left" style="margin:20px; color: #D5D5D5; padding: 10px;">
+			<tr>
+				<td style="width: 200px;">금호고속</td>
+				<td style="width: 200px;">삼화</td>
+				<td style="width: 200px;">동원고속버스</td>
+				<td style="width: 200px;">한일고속</td>
+				<td style="width: 200px;">금호속리산고속</td>
+				<td style="width: 200px;">동양고속</td>			
+				<td style="width: 200px;">중앙고속</td>			
+				<td style="width: 200px;">천일고속</td>			
+			</tr>
+			
+			
+			<tr>
+				<td style="width: 200px;">서비스 이용약관</td>
+				<td style="width: 200px;">개인정보 취급방침</td>
+				<td style="width: 200px;">고속버스 운송약관</td>
+				<td style="width: 200px;">전자금융거래 이용약관</td>
+				<td style="width: 200px;">한국스마트카드</td>
+
+			</tr>
+			
+			<tr>
+				<td>COPYRIGHT@2016.WWW.KHX.CO.KR.ALLRIGHT RESERVED</td>
+			</tr>
+		</table>
+	</div>
+			 <div class="dropup">
+			    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">관련사이트<span class="caret"></span></button>
+			    <ul class="dropdown-menu" style="text-align: center; align: right;">
+			      <li><a href="#">국가대중교통정보센터</a></li>
+			      <li><a href="#">인천장애인콜택시</a></li>
+			      <li><a href="#">korail</a></li>
+			      <li><a href="#">korail 통합예매시스템</a></li>
+			      <li><a href="#">고객센터</a></li>
+			      <li class="divider"></li>
+			      <li><a href="#">관련사이트</a></li>
+			    </ul>
+			  </div>
+		
+</form>
+

@@ -88,6 +88,7 @@
 			<li>예매확인</li>
 			<li>운행정보</li>
 			<li>이용안내</li>
+			<li><a href="<%=request.getContextPath()%>/hjs/stationInfo.action">기차역정보</a></li>
 			<li>고객센터</li>
 		</ul>
 	</div>

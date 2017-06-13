@@ -17,9 +17,9 @@
   
   <style type="text/css">
   	#mycontainer	{ width:90%; margin:0 auto; padding:20px; }
-	#myheader		{ background-color:#EBEBE0; height:56px; padding: 10px; }
+	#myheader		{ background-color:#639EB0; height:56px; padding: 10px; }
 	#mycontent		{ background-color:#F5F5F5; min-height:800px; padding-top: 40px;}
-	#myfooter		{ background-color:#555555; height:100px; }
+	#myfooter		{ background-color:#000000; height:100px; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	
 	#myheader a {text-decoration:none;}
