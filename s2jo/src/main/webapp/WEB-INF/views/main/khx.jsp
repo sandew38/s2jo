@@ -58,7 +58,12 @@ function goBooking()
 	<div style="width:80%; margin: 0 auto; border: solid blue 2px; min-height: 400px; " align="center">
 		<div id="leftside" align="center" >
 			<div id = "oneway" align="center">
-				[편도 아이콘] 편도 [체크아이콘]
+				 편도 <img src = "<%=request.getContextPath()%>/resources/images/oneway.png"
+					alt="편도" style="width: 10%; cursor: pointer;">
+					
+					<img src = "<%=request.getContextPath()%>/resources/images/oneway_selected.png"
+					alt="편도" style="width: 10%; cursor: pointer;">
+					
 			</div>
 			<div style="clear: both;">
 				<div class="floatleft left" style="width:50%;">출발지<br/>선택</div>
