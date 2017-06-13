@@ -76,14 +76,12 @@
 </script>
 
 <div id = "outer" style=" margin-top: 56px;">
-
 	<div id = "logo" align="center" style="margin-top: 10%; margin-bottom: 10%;">
 		<img alt="khxlogo"
 			 src="<%=request.getContextPath()%>/resources/images/khxlogo.png"
 			 style="width: 35%;">
 			 <h4 style="font-weight: bold;">KHX 통합 예매</h4>
 	</div>
-
 	<div align="center" >
 		<ul style="list-style: none; margin-top: 30%; padding-bottom: 30%;" >
 			<li>기차예매</li>
@@ -93,7 +91,6 @@
 			<li>고객센터</li>
 		</ul>
 	</div>
-
 	<div style="margin: 0 auto;" align="center">
 		현재시각 :&nbsp; 
 		<div id="clock" style="display:inline;"></div>
@@ -101,7 +98,6 @@
 	<%-- <div id="displayRank" style="min-width: 90%; margin: 0 auto;  margin-top: 20px; margin-bottom: 70px; padding-left: 10px; padding-right: 10px;"></div>
 	<div id="chart-container" style="min-width: 90%; min-height: 400px; margin: 0 auto; border: solid #F0FFFF 5px;"></div>
 	 --%>	
-		
 	
 </div>
 	
