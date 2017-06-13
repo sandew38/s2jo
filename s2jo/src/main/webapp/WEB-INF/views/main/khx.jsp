@@ -62,6 +62,11 @@
 	cursor: pointer;
 }
 
+/*모달*/
+
+
+
+
 </style>
 
 
@@ -78,9 +83,17 @@ $(document).ready(function(){
 	$(".doubledeparture").hide();
 	$(".singledeparture").show();
 	
+	
+
+	  
 }); // end of $(document).ready(function() ----
 
-		
+/* 		
+function picdeparture()
+{
+  $('div.modal').modal();
+}
+		 */
 function goBooking() 
 {
 	location.href="booking.action";
@@ -177,9 +190,11 @@ function roundwayOff()
 					
 			</div>
 			<div style="clear: both; margin-bottom : 3%; width : 96%;">
-				<div class="floatleft left departure" style="width:48%;" id = "choosedeparture">
+				<div class="floatleft left departure" style="width:48%;" id = "choosedeparture"  data-target="#layerpop" data-toggle="modal" onclick="picdeparture();">
 				출발지 선택
-				
+								
+								
+									
 					
 				</div>
 				<div class="floatleft left arrival" style="width:48%; margin-left: 2%; margin-right: 0%;">도착지 선택</div>
