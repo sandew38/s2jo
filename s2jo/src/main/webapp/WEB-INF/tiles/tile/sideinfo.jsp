@@ -77,10 +77,12 @@
 
 <div id = "outer" style=" margin-top: 56px;">
 	<div id = "logo" align="center" style="margin-top: 10%; margin-bottom: 10%;">
-		<img alt="khxlogo"
+		<a href="<%=request.getContextPath()%>/khx.action" style = "color : #639EB0; text-decoration: none;">
+			<img alt="khxlogo"
 			 src="<%=request.getContextPath()%>/resources/images/khxlogo.png"
 			 style="width: 35%;">
 			 <h4 style="font-weight: bold;">KHX 통합 예매</h4>
+		 </a>
 	</div>
 	<div align="center" >
 		<ul style="list-style: none; margin-top: 30%; padding-bottom: 30%;" >

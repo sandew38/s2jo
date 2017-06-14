@@ -7,13 +7,6 @@
 <style type="text/css">
 
 
-a
-{
-	color: white;
-	font-size: medium;
-}
-
-
 </style>
 
 
@@ -24,9 +17,9 @@ a
    	
 <!-- ==== 로그인하지 않았을 때 아래 메뉴 출력하기. -->
 	<c:if test="${sessionScope.nonloginuser == null}">
-	  <a href="<%=request.getContextPath()%>/nonloginform.action">비회원로그인</a> |
-	  <a>로그인</a> |
-	  <a>회원가입</a> |
+	  <a href="<%=request.getContextPath()%>/nonloginform.action" style="color: white;	font-size: medium;">비회원로그인</a> |
+	  <a style="color: white;	font-size: medium;">로그인</a> |
+	  <a style="color: white;	font-size: medium;">회원가입</a> |
   	</c:if>
  	  
 <!-- ===== #52. 로그인 성공 시 사용자 성명 출력하기. ===== -->
@@ -37,9 +30,9 @@ a
   </c:if>
   
   
- 	  <a>마이페이지</a> |
- 	  <a>결제내역조회</a> |
- 	  <a>사이트맵</a>
+ 	  <a style="color: white;	font-size: medium;">마이페이지</a> |
+ 	  <a style="color: white;	font-size: medium;">결제내역조회</a> |
+ 	  <a style="color: white;	font-size: medium;">사이트맵</a>
 <!-- 	<hr style="width:30%; " align="right"/> -->
 
    </span>
