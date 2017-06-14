@@ -37,6 +37,14 @@ public class KhxDAO implements InterKhxDAO {
 		return departureList;
 	}
 
+// ==== 도착지 리스트를 가져오는 메소드
+	@Override
+	public List<String> arrivalList() {
+
+		List<String> arrivalList = sqlsession.selectList("khx.arrivalList");
+		
+		return arrivalList;
+	}
 	
 // ==== 열차 운행 정보를 가져오는 메소드 
 	@Override

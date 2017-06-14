@@ -16,6 +16,8 @@ public interface InterKhxService {
 
 	List<String> departureList();	// 출발지 목록 가져오기 
 	
+	List<String> arrivalList();	// 도착지 목록 가져오기 
+	
 	List<TrainviewVO> trainList();	// 기차 운행 정보 가져오기
 
 }

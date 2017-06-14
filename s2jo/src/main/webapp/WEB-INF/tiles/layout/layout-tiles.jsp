@@ -37,9 +37,9 @@
   
   <style type="text/css">
   	#mycontainer	{ width:100%; margin:0 auto; padding:20px; }
-	#myheader		{ float:right; min-height:200px; width :75%; padding: 10px;}
-	#mycontent		{ float:left; width:75%; min-height:800px;  padding-top: 40px; border:0px solid #1CE3A9;}
-	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; min-height:950px; padding-top: 10px;}
+	#myheader		{ float:right; min-height:200px; width :85%; padding: 10px;}
+	#mycontent		{ float:left; width:85%; min-height:800px;  padding-top: 40px; border:0px solid #1CE3A9;}
+	#mysideinfo		{ background-color:#FFFFFF; float:left; width:15%; min-height:950px; padding-top: 10px;}
 	#myfooter		{ background-color:#000000; clear:both; height:20%; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	

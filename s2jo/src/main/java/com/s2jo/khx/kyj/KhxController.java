@@ -56,7 +56,11 @@ public class KhxController {
 			// 출발지 목록 가져오기
 			List<String> departureList = service.departureList();
 			
+			// 도착지 목록 가져오기
+			List<String> arrivalList = service.arrivalList();
+			
 			req.setAttribute("departureList", departureList);
+			req.setAttribute("arrivalList", arrivalList);
 			
 			return "main/khx.tiles";
 //			└> /Board/src/main/webapp/WEB-INF/views/main/khx.jsp 파일을 생성한다.

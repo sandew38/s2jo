@@ -12,7 +12,11 @@
 		from final_runinfo
 	</select>
 	
-	
+	<!-- ==== 도착지 리스트 가져오기	 -->
+	<select id="arrivalList" resultType="String">
+		select DISTINCT(arrival)
+		from final_runinfo
+	</select>
 	
 	
 	<!-- ==== 열차 운행 정보 가져오기	 -->
