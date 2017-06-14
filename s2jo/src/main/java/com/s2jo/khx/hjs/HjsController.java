@@ -28,11 +28,13 @@ import com.s2jo.khx.service.hjs.HjsService;
 
 public class HjsController {
 
-// ==== 의존객체 주입하기 (DI : Dependency Injection) ====	
-	
+	// ==== 의존객체 주입하기 (DI : Dependency Injection) ====	
 	@Autowired
 	private HjsService service;
 	
+	// ===== 관광지 Api 다루는 클래스 의존객체 주입하기(DI: Dependency Injection) =====
+	@Autowired
+	private ApiExplorer apiExplorer;
 	
 	// ==== #js1. 기차역정보 메인 페이지 요청 ====
 	@RequestMapping(value="/hjs/stationInfo.action", method={RequestMethod.GET})
@@ -44,6 +46,24 @@ public class HjsController {
 		
 	}// end of public String main(HttpServletRequest req) ----------------
 	
+	
+	// >> Ajax
+	// ==== #js2. 기차역(시/도)별 관광정보 리스트 요청 ====
+	@RequestMapping(value="/hjs/sidoInfo.action", method={RequestMethod.POST})
+	public String sidoInfo(HttpServletRequest req){
+		
+		
+		System.out.println("메소드 테스트 ========================================");
+		
+		
+		
+		
+		
+		
+		return "hjs/sidoInfo.tiles";
+		// /s2jo/src/main/webapp/WEB-INF/views/hjs/sidoInfo.jsp 파일을 생성한다
+		
+	}// end of public String main(HttpServletRequest req) ----------------
 	
 	
 }
