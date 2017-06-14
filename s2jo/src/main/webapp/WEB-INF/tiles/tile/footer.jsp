@@ -5,7 +5,7 @@
 
 
 
-<form style="height: 100%;">
+<form style="height: 200px;">
 	<div>
 		<table align="left" style="margin:20px; color: #D5D5D5; padding: 10px;">
 			<tr>

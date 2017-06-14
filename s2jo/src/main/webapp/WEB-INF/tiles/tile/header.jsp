@@ -14,27 +14,22 @@
 <%-- 로그인 하지않은 상태의 header --%>
 <div align="right" style="text-align: right; color: white;">
    <span style="text-align: right; height: 100px;">
-   	
 <!-- ==== 로그인하지 않았을 때 아래 메뉴 출력하기. -->
 	<c:if test="${sessionScope.nonloginuser == null}">
 	  <a href="<%=request.getContextPath()%>/nonloginform.action" style="color: white;	font-size: medium;">비회원로그인</a> |
 	  <a style="color: white;	font-size: medium;">로그인</a> |
 	  <a style="color: white;	font-size: medium;">회원가입</a> |
   	</c:if>
- 	  
 <!-- ===== #52. 로그인 성공 시 사용자 성명 출력하기. ===== -->
   <c:if test="${sessionScope.nonloginuser != null}">
-	  <li style="margin-left: 45%; margin-top: 1%;">
-	  	<span style="color: navy; font-weight: bold;">${sessionScope.nonloginuser.name}</span> 님 | 
-	  </li>
+	  	<span style="color: white; font-size: medium; font-weight: bold;">${sessionScope.nonloginuser.nhp} 님 </span>| 
+	  	<a href="<%=request.getContextPath()%>/nonlogout.action">
+	  	<span style="color: white; font-size: medium; font-weight: bold;">로그아웃 |</span> 
+	  	</a>
   </c:if>
-  
-  
  	  <a style="color: white;	font-size: medium;">마이페이지</a> |
  	  <a style="color: white;	font-size: medium;">결제내역조회</a> |
  	  <a style="color: white;	font-size: medium;">사이트맵</a>
-<!-- 	<hr style="width:30%; " align="right"/> -->
-
    </span>
 </div>
 

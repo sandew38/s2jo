@@ -15,8 +15,12 @@ public interface InterkhxNonMemberService {
 
 	
 	int nonloginEnd(HashMap<String, String> map); // 비회원 로그인 여부 알아오기 
+
+	khxpscNonMemberVO getNonLoginEnd(String nhp); //비회원 로그인완료 요청
+
+
 	
-	khxpscNonMemberVO getnonLoginMember(String nhp); // 로그인 성공한 비회원 정보 가져오기
+//  khxpscNonMemberVO nonLoginMember(String nhp); // 로그인 성공한 비회원 정보 가져오기
 	
 //	int loginEnd(HashMap<String, String> map); // 로그인 여부 알아오기
 

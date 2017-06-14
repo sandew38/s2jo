@@ -24,6 +24,6 @@
 			alert("회원가입 부터 먼저 하세요 !!");
 			javascript:history.back();
 			// 이전 페이지로 이동
-	</c:if>	
+		</c:if>	
 </script>
     

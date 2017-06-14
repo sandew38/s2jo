@@ -15,15 +15,17 @@ public class khxpscNonMemberDAO {
 
 	//비회원정보 가져오기
 	public int nonloginEnd(HashMap<String, String> map) {
-		int n = sqlsession.selectOne("board.nonloginEnd", map);
+		int n = sqlsession.selectOne("pscmember.nonloginEnd", map);
+									/*xml이름.xml에서 불러다 쓸 ID*/
 		return n;
 	}
-		
+	
 	//로그인성공한 비회원 정보가져오기
-	public khxpscNonMemberVO getnonLoginMember(String nhp) {
-		khxpscNonMemberVO nonloginuser = sqlsession.selectOne("board.getnonLoginMember", nhp);
+	public khxpscNonMemberVO getNonLoginEnd(String nhp) {
+		khxpscNonMemberVO nonloginuser = sqlsession.selectOne("pscmember.getNonLoginEnd", nhp);
 		return nonloginuser;
 	}
+
 
 /*
 	//회원정보 가져오기
@@ -38,5 +40,6 @@ public class khxpscNonMemberDAO {
 		return loginuser;
 	}
 */
+
 
 }//end of public class khxpscNonMemberDAO {

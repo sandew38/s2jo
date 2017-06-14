@@ -21,35 +21,20 @@ public class khxNonMemberService implements InterkhxNonMemberService {
 	
 	@Autowired
 	private khxpscNonMemberDAO knmdao;
-	
-	@Override//비회원 로그인 여부 알아오기
+
+	@Override//비회원 로그인여부 확인
 	public int nonloginEnd(HashMap<String, String> map) {
-		int n = knmdao.nonloginEnd(map);
+		int n= knmdao.nonloginEnd(map);
 		return n;
-	}
-	
-	
-	@Override//로그인 성공한 비회원 정보 가져오기
-	public khxpscNonMemberVO getnonLoginMember(String nhp) {
-		khxpscNonMemberVO nonloginuser = knmdao.getnonLoginMember(nhp);
+	}//end of public int nonloginEnd(HashMap<String, String> map) {
+
+	@Override//비회원 로그인완료 요청
+	public khxpscNonMemberVO getNonLoginEnd(String nhp) {
+		khxpscNonMemberVO nonloginuser = knmdao.getNonLoginEnd(nhp);
 		return nonloginuser;
 	}
 
-
-	public khxpscNonMemberVO getnonLoginMember(khxpscNonMemberVO nonloginuser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-/*
-	public khxpscNonMemberVO getnonLoginMember(khxpscNonMemberVO nonloginuser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
-
+ 
 
 	
 	

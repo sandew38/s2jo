@@ -22,19 +22,17 @@
 	               end
 	             )
 	         end as NONLOGINCHECK
-	  from dual;
+	  from dual
 	</select>
 	
 	
 	<!-- ===== #51. 로그인 성공한 비회원 정보 가져오기 ===== -->
-<!--
-	<select id="getLoginMember" parameterType="String" resultType="com.spring.member.model.MemberVO"> 
+
+	<select id="getNonLoginEnd" parameterType="String" resultType="com.s2jo.khx.model.psc.khxpscNonMemberVO"> 
 	   select nonno, nhp, npwd, status
 	   from final_nonmember
-	   where status = 1 and nhp = #{nhp};
+	   where status = 1 and nhp = #{nhp}
 	</select>
- -->	
-	
 	
 </mapper>
 

@@ -7,6 +7,7 @@ public class khxpscNonMemberVO {
 	private String npwd; 	/* 임의비밀번호 */
 	private String status;	/* 가입상태 */
 	
+	@SuppressWarnings("unused")
 	private khxpscNonMemberVO(){}
 
 	public khxpscNonMemberVO(String nonno, String nhp, String npwd, String status) {

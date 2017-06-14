@@ -39,8 +39,8 @@
   	#mycontainer	{ width:100%; margin:0 auto; padding:20px; }
 	#myheader		{ float:right; min-height:200px; width :85%; padding: 10px;}
 	#mycontent		{ float:left; width:85%; min-height:800px;  padding-top: 40px; border:0px solid #1CE3A9;}
-	#mysideinfo		{ background-color:#FFFFFF; float:left; width:15%; min-height:950px; padding-top: 10px;}
-	#myfooter		{ background-color:#000000; clear:both; height:20%; }
+	#mysideinfo		{ background-color:#FFFFFF; float:left; width:15%; min-height:1200px; padding-top: 10px;}
+	#myfooter		{ float:right; background-color:#000000; clear:both; width:85%; min-height:200px; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	
 	#myheader a {text-decoration:none;}
@@ -72,7 +72,7 @@
 		</div>
 
 <div id = "khxbackgroundimg">
-		<div id="myheader">
+		<div id="myheader">	
 			<tiles:insertAttribute name="header" />
 		</div>
 		
