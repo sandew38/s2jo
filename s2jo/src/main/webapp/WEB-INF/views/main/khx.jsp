@@ -98,10 +98,7 @@
 	overflow: auto;	
 }
 
-
-
 </style>
-
 
 <script type="text/javascript">
 
@@ -116,12 +113,21 @@ $(document).ready(function(){
 	$(".doubledeparture").hide();
 	$(".singledeparture").show();
 	
-	
+	var traintype = $("#pictraintype option:selected").val();
+	$("#traintype").val(traintype);
 
-	  
-}); // end of $(document).ready(function() ----
+	// 기차 종류 선택시 
+	$("#pictraintype").change(function(event){
+	//	alert("변경됨!");
+	 	var traintype = $("#pictraintype option:selected").val();
+	//	alert(traintype);	
+		$("#traintype").val(traintype);
+	}); // end of $("#pictraintype").change(function(event) ----
+	
+});// end of $(document).ready(function() ----
 
 		
+   
 // 출발지 선택 모달
 function picdeparture()
 {	location.href="#picdeparture";	}
@@ -132,8 +138,7 @@ function picarrival()
 
 // 출발지 선택 후  
 function finishDpic(event)
-{
-	
+{	
 	var arrival = $("#arrival").val();
 	
 	if(event==arrival)
@@ -168,10 +173,8 @@ function finishDpic(event)
 		// 출,도착지 창을 닫는다.
 		location.href="#";	
 		
-	} // end of if ----
-
-	
-}
+	} // end of if ----	
+} // end of function finishDpic(event) ----
 
 // 도착지 선택 후
 function finishApic(event)
@@ -211,19 +214,12 @@ function finishApic(event)
 		
 	} // end of if ----
 	
-}
+} // end of function finishApic(event) ----
+
 
 // 그냥 닫기 
 function finishpic()
-{
-	// 여기서 값을 넣어주고 해야함.
-	location.href="#";	
-}
-
-function goBooking() 
-{
-	location.href="booking.action";
-}
+{	location.href="#";	}
 
 // 편도 선택시
 function oneway(event)
@@ -248,7 +244,6 @@ function roundway(event)
 	$(".doubledeparture").show();
 }
 
-
 // 편도 on
 function onewayOn()
 {
@@ -257,6 +252,7 @@ function onewayOn()
 	$("#oneway").removeClass("deselected");
 
 }
+
 // 편도 off
 function onewayOff()
 {
@@ -264,6 +260,7 @@ function onewayOff()
 	$("#oneway").addClass("deselected");
 	$(".oneway").show();
 }
+
 // 왕복 on
 function roundwayOn()
 {
@@ -271,6 +268,7 @@ function roundwayOn()
 	$(".roundway_selected").show();	
 	$("#roundway").removeClass("deselected");
 }
+
 // 편도 off
 function roundwayOff()
 {
@@ -281,17 +279,32 @@ function roundwayOff()
 
 
 
+
+//조회하기
+function goBooking() 
+{
+	location.href="booking.action";
+}
+
+
 </script>
 
 <!-- content 전체 div -->
 <div align="center" style="border: solid gold 0px; height: 100%; ">
+
 	<div align="center" style="width:90%; margin: 0 auto; margin-bottom: 40px; color: white; font-weight: bold;">
 		<h2>즐거운 여행의 시작과 끝, KHX와 함께!</h2>
 
 	</div>
 	
+	<!-- 전체 div -->
 	<div style="width:60%; margin: 0 auto; border: solid #639EB0 0px; min-height: 400px; " align="center">
+	
+	
+		<!-- 왼쪽 메뉴 -->
 		<div id="leftside" align="center"  >
+		
+			<!-- 편도 -->
 			<div id = "oneway" align="center" style="cursor: pointer; " onclick="oneway();">
 					 
 				
@@ -315,6 +328,8 @@ function roundwayOff()
 				 </span>
 					
 			</div>
+			
+			<!-- 출발지, 도착지 선택 -->
 			<div style="clear: both; margin-bottom : 3%; width : 96%;">
 			
 				<div class="floatleft left departure" style="width:48%;" 
@@ -330,53 +345,79 @@ function roundwayOff()
 				</div>
 				
 			</div>
-			<div style="clear: both; text-align: left; padding-left: 5%;" class = "left traintype">기차</div>
-			<div style="clear: both; text-align: left; padding-left: 5%; margin-top: 2%;" class = "left trainclass">등급</div>
-		</div>
-		
-		<div id="rightside" >
-			<div id = "roundway" align="center" style="cursor: pointer;" onclick="roundway();">
 			
-				 <span class = "roundway" >
-				 
-				 	<img src = "<%=request.getContextPath()%>/resources/images/roundway.png"
-						alt="왕복" style="width: 20%; ">
-						
-					<span style="color : #cccccc;">  &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>
-					
-				 </span>
-										
-				 <span class = "roundway_selected">
-				 
-				 	<img src = "<%=request.getContextPath()%>/resources/images/roundway_selected.png"
-						alt="왕복선택" style="width: 20%; cursor: pointer;">
+			<!-- 기차 선택 -->
+			<div style="clear: both; text-align: left; padding-left: 5%;" class = "left traintype"
+					onclick="pictraintype();">
+				기차 <br/>
 				
-					<span style="color : #639EB0;"> &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>		
-					
-				 </span>
-					
+				<!-- 기차 선택 select -->
+				<div align="center" style="text-align: center;">
+					<select id="pictraintype" style="text-align: right; width:60%; height: 60%; border-collapse: collapse; border-style: none; font-size: large;">
+						<option value = "-1" selected> 기차 종류를 선택해주세요. </option>
+						<option value = "KHX" > KHX </option>
+						<option value = "무궁화" > 무궁화호 </option>
+						<option value = "새마을" > 새마을호 </option>
+					</select>
+				</div>
+				
 			</div>
 			
-			
-		<div style="clear: both; width:96%; margin: 2%; margin-bottom: 1%; " class = "right singledeparture" >
-			<div style="float: left; width: 100%"  class = "departuredate singledeparture">
-				가는 날 
-			</div>
+			<!-- 특실, 일반실 선택 -->
+			<div style="clear: both; text-align: left; padding-left: 5%; margin-top: 2%;" class = "left trainclass">등급</div>
+		
 		</div>
 		
-		<div style="clear: both; height: 100px; margin: 1%;  margin-bottom: 3%;" class = "doubledeparture" >
-			<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
-				가는 날 
-			</div>
 		
-			<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
-				오는 날 
+		<!-- 오른쪽 메뉴 -->
+		<div id="rightside" >
+		
+			<!-- 왕복 -->
+			<div id = "roundway" align="center" style="cursor: pointer;" onclick="roundway();">
+				
+					 <span class = "roundway" >
+					 
+					 	<img src = "<%=request.getContextPath()%>/resources/images/roundway.png"
+							alt="왕복" style="width: 20%; ">
+							
+						<span style="color : #cccccc;">  &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>
+						
+					 </span>
+											
+					 <span class = "roundway_selected">
+					 
+					 	<img src = "<%=request.getContextPath()%>/resources/images/roundway_selected.png"
+							alt="왕복선택" style="width: 20%; cursor: pointer;">
+					
+						<span style="color : #639EB0;"> &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>		
+						
+					 </span>
+						
+				</div>
+				
+			<!-- 편도일 경우 가는날 선택 -->
+			<div style="clear: both; width:96%; margin: 2%; margin-bottom: 1%; " class = "right singledeparture" >
+				<div style="float: left; width: 100%"  class = "departuredate singledeparture">
+					가는 날 
+				</div>
 			</div>
-		</div>
 			
+			<!-- 왕복일 경우 가는날, 오는날 선택 -->
+			<div style="clear: both; height: 100px; margin: 1%;  margin-bottom: 3%;" class = "doubledeparture" >
+				<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
+					가는 날 
+				</div>
+			
+				<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
+					오는 날 
+				</div>
+			</div>
+				
+			<!-- 조회하기 -->
 			<div id="browse" class="browse right" style="height: 200px; margin-top : 2%; padding-top: 70px; cursor: pointer; background-color: #639EB0;" onclick="goBooking();">
-				<span style="height: 90%; width: 90%; margin: 1%; color: white; font-weight: bold; font-size: xx-large;"> 조회하기 </span>
-	  		</div>
+					<span style="height: 90%; width: 90%; margin: 1%; color: white; font-weight: bold; font-size: xx-large;"> 조회하기 </span>
+		  		</div>
+		
 		</div>
 		
 	</div>
@@ -384,129 +425,129 @@ function roundwayOff()
 
 <!-- 넘겨줄 폼 -->
 <form id = "browseForm">
-	userid : <input type ="text" id = "userid" name = "userid">
 	<br/><br/> 
 	waytype : <input type="text" id ="waytype" name = "waytype">
 	<br/><br/> 
-	departure : <input type ="text" id = "departure" name = "departure">
+	departure : <input type ="text" id = "departure" name = "departure" value = "-1">
 	<br/><br/> 
-	arrival : <input type ="text" id = "arrival" name = "arrival">
+	arrival : <input type ="text" id = "arrival" name = "arrival" value ="-1">
+	<br/><br/> 
+	traintype : <input type ="text" id = "traintype" name = "traintype">
 </form>
     
 </div>
 
 
 
-		<!-- 출발지 선택 모달창 시작 -->				
-					<div class="white_content" id="picdeparture">
-				        <div align="center">				            
-				           <div style="clear: both; margin-bottom : 5%; width : 96%;">
-				           
-								<div class="floatleft left box-shadow" style="width:48%; border: 5px solid #639EB0; cursor: pointer; " 
-									 id="choosedeparture" onclick="picdeparture();">
-									출발지 선택	<br/>
-									<span id = "departurefromD" style="font-size: large; font-weight: bold;"></span>
-								</div>
-								
-								<div class="floatleft left" style="width:48%; margin-left: 2%; margin-right: 0%; cursor: pointer;"
-									id="choosearrival" onclick="picarrival();">
-									도착지 선택	<br/>
-									<span id = "arrivalfromD" style="font-size: large; font-weight: bold;"></span>
-									
-								</div>
-								
-							</div>
-							
-							<div style="clear: both; margin-top : 5%; width : 96%; border: 2px solid #639EB0; 
-								 height:10%; border-radius: 20px; text-align: center; padding-top : 4%;" align="center">
-								 
-								<span style="font-weight: bold;">주요 출발지 : </span> 
-									<c:forEach items="${departureList}" var="dList">
-										<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> 	${dList}	|</span>	
-										<input type="hidden" value="${dList}">
-									</c:forEach>			
-									
-							</div>
-							
-							
-							<div style="clear: both; margin-top : 3%; margin-bottom:0%; margin-left: 0%; margin-right: 0%; width : 96%; 
-								 border: 2px solid #639EB0; height:60%; border-radius: 20px; 
-								 paddind-top: 3%; text-align: center;" align="center">
-								<ul style="list-style: none;">
-									<c:forEach items="${departureList}" var="dList">
-										<li>
-											<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> ${dList}	</span>
-											<input type="hidden" value="${dList}">
-										</li>
-									</c:forEach>			
-								</ul>
-							</div>
-				            
-				           
-				           <div id = "dclose" onclick="finishpic();"
-				           		style="clear: both; cursor: pointer; font-size: 20; color: white; 
-				           		font-weight: bold; background-color: #639EB0; margin-top: 3%; width: 96%;" align="center" class="btn" >닫기</div>
-				           
-				           
-				        </div>
-				    </div>
-		<!-- 출발지 선택 모달창 끝 -->
+<!-- 출발지 선택 모달창 -->				
+	<div class="white_content" id="picdeparture">
+        <div align="center">				            
+           <div style="clear: both; margin-bottom : 5%; width : 96%;">
+           
+				<div class="floatleft left box-shadow" style="width:48%; border: 5px solid #639EB0; cursor: pointer; " 
+					 id="choosedeparture" onclick="picdeparture();">
+					출발지 선택	<br/>
+					<span id = "departurefromD" style="font-size: large; font-weight: bold;"></span>
+				</div>
+				
+				<div class="floatleft left" style="width:48%; margin-left: 2%; margin-right: 0%; cursor: pointer;"
+					id="choosearrival" onclick="picarrival();">
+					도착지 선택	<br/>
+					<span id = "arrivalfromD" style="font-size: large; font-weight: bold;"></span>
+					
+				</div>
+				
+			</div>
+			
+			<div style="clear: both; margin-top : 5%; width : 96%; border: 2px solid #639EB0; 
+				 height:10%; border-radius: 20px; text-align: center; padding-top : 4%;" align="center">
+				 
+				<span style="font-weight: bold;">주요 출발지 : </span> 
+					<c:forEach items="${departureList}" var="dList">
+						<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> 	${dList}	|</span>	
+						<input type="hidden" value="${dList}">
+					</c:forEach>			
+					
+			</div>
+			
+			
+			<div style="clear: both; margin-top : 3%; margin-bottom:0%; margin-left: 0%; margin-right: 0%; width : 96%; 
+				 border: 2px solid #639EB0; height:60%; border-radius: 20px; 
+				 paddind-top: 3%; text-align: center;" align="center">
+				<ul style="list-style: none;">
+					<c:forEach items="${departureList}" var="dList">
+						<li>
+							<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> ${dList}	</span>
+							<input type="hidden" value="${dList}">
+						</li>
+					</c:forEach>			
+				</ul>
+			</div>
+            
+           
+           <div id = "dclose" onclick="finishpic();"
+           		style="clear: both; cursor: pointer; font-size: 20; color: white; 
+           		font-weight: bold; background-color: #639EB0; margin-top: 3%; width: 96%;" align="center" class="btn" >닫기</div>
+           
+           
+        </div>
+    </div>
 
-		<!-- 도착지 선택 모달창 시작 -->				
-					<div class="white_content" id="picarrival">
-				        <div align="center">				            
-				           <div style="clear: both; margin-bottom : 5%; width : 96%;">
-				           
-								<div class="floatleft left box-shadow" style="width:48%; cursor: pointer; " 
-										id="choosedeparturefromA" onclick="picdeparture();">
-									출발지 선택	<br/>
-									<span id = "departurefromA" style="font-size: large; font-weight: bold;"></span>
-								</div>
-								
-								<div class="floatleft left" style="width:48%; margin-left: 2%; margin-right: 0%;  border: 5px solid #639EB0;
-										cursor: pointer;"
-										id="choosearrivalfromA" onclick="picarrival();">
-									도착지 선택	<br/>
-									<span id = "arrivalfromA" style="font-size: large; font-weight: bold;"></span>
-								</div>
-								
-							</div>
-							
-							<div style="clear: both; margin-top : 5%; width : 96%; border: 2px solid #639EB0; 
-								 height:10%; border-radius: 20px; text-align: center; padding-top : 4%;" align="center">
-								 
-								<span style="font-weight: bold;">주요 도착지 : </span> 
-									<c:forEach items="${arrivalList}" var="aList">
-										<span onclick="finishApic('${aList}');" style="cursor: pointer;">	${aList}	|</span>
-										<input type="hidden" value="${aList}">
-									</c:forEach>			
-									
-							</div>
-							
-							
-							<div style="clear: both; margin-top : 3%; margin-bottom:0%; margin-left: 0%; margin-right: 0%; width : 96%; 
-								 border: 2px solid #639EB0; height:60%; border-radius: 20px; 
-								 paddind-top: 3%; text-align: center;" align="center">
-								<ul style="list-style: none;">
-									<c:forEach items="${arrivalList}" var="aList">
-										<li>
-											<span onclick="finishApic('${aList}');" style="cursor: pointer;"> ${aList}	</span>
-											<input type="hidden" value="${aList}">
-										</li>
-									</c:forEach>			
-								</ul>
-							</div>
-				            
-				           
-				           <div id = "aclose" onclick="finishpic();"
-				           		style="clear: both; cursor: pointer; font-size: 20; color: white; 
-				           		font-weight: bold; background-color: #639EB0; margin-top: 3%; width: 96%;" align="center" class="btn" >닫기</div>
-				           
-				           
-				        </div>
-				    </div>
-		<!-- 도착지 선택 모달창 끝 -->
+<!-- 도착지 선택 모달창 -->				
+	<div class="white_content" id="picarrival">
+        <div align="center">				            
+           <div style="clear: both; margin-bottom : 5%; width : 96%;">
+           
+				<div class="floatleft left box-shadow" style="width:48%; cursor: pointer; " 
+						id="choosedeparturefromA" onclick="picdeparture();">
+					출발지 선택	<br/>
+					<span id = "departurefromA" style="font-size: large; font-weight: bold;"></span>
+				</div>
+				
+				<div class="floatleft left" style="width:48%; margin-left: 2%; margin-right: 0%;  border: 5px solid #639EB0;
+						cursor: pointer;"
+						id="choosearrivalfromA" onclick="picarrival();">
+					도착지 선택	<br/>
+					<span id = "arrivalfromA" style="font-size: large; font-weight: bold;"></span>
+				</div>
+				
+			</div>
+			
+			<div style="clear: both; margin-top : 5%; width : 96%; border: 2px solid #639EB0; 
+				 height:10%; border-radius: 20px; text-align: center; padding-top : 4%;" align="center">
+				 
+				<span style="font-weight: bold;">주요 도착지 : </span> 
+					<c:forEach items="${arrivalList}" var="aList">
+						<span onclick="finishApic('${aList}');" style="cursor: pointer;">	${aList}	|</span>
+						<input type="hidden" value="${aList}">
+					</c:forEach>			
+					
+			</div>
+			
+			
+			<div style="clear: both; margin-top : 3%; margin-bottom:0%; margin-left: 0%; margin-right: 0%; width : 96%; 
+				 border: 2px solid #639EB0; height:60%; border-radius: 20px; 
+				 paddind-top: 3%; text-align: center;" align="center">
+				<ul style="list-style: none;">
+					<c:forEach items="${arrivalList}" var="aList">
+						<li>
+							<span onclick="finishApic('${aList}');" style="cursor: pointer;"> ${aList}	</span>
+							<input type="hidden" value="${aList}">
+						</li>
+					</c:forEach>			
+				</ul>
+			</div>
+            
+           
+           <div id = "aclose" onclick="finishpic();"
+           		style="clear: both; cursor: pointer; font-size: 20; color: white; 
+           		font-weight: bold; background-color: #639EB0; margin-top: 3%; width: 96%;" align="center" class="btn" >닫기</div>
+           
+           
+        </div>
+    </div>
 
+<!-- 기차 종류 선택 모달창 -->
 
 
 
