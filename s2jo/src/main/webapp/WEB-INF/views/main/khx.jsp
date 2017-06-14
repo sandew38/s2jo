@@ -301,7 +301,7 @@ function roundwayOff()
 					 <img src = "<%=request.getContextPath()%>/resources/images/oneway.png"
 						alt="편도" style="width: 20%; ">
 						
-					 <span style="color : #cccccc;"> &#xB;&#xB;&#xB; 편도  </span>		
+					 <span style="color : #cccccc;"> &nbsp;&nbsp;&nbsp;&nbsp; 편도  </span>		
 					 
 				 </span>
 										
@@ -310,7 +310,7 @@ function roundwayOff()
 					<img src = "<%=request.getContextPath()%>/resources/images/oneway_selected.png"
 						alt="편도선택" style="width: 20%; cursor: pointer;">
 						
-					<span style="color : #639EB0;">  &#xB;&#xB;&#xB; 편도 </span>
+					<span style="color : #639EB0;">  &nbsp;&nbsp;&nbsp;&nbsp; 편도 </span>
 					
 				 </span>
 					
@@ -342,7 +342,7 @@ function roundwayOff()
 				 	<img src = "<%=request.getContextPath()%>/resources/images/roundway.png"
 						alt="왕복" style="width: 20%; ">
 						
-					<span style="color : #cccccc;">  &#xB;&#xB;&#xB; 왕복 </span>
+					<span style="color : #cccccc;">  &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>
 					
 				 </span>
 										
@@ -351,7 +351,7 @@ function roundwayOff()
 				 	<img src = "<%=request.getContextPath()%>/resources/images/roundway_selected.png"
 						alt="왕복선택" style="width: 20%; cursor: pointer;">
 				
-					<span style="color : #639EB0;"> &#xB;&#xB;&#xB; 왕복 </span>		
+					<span style="color : #639EB0;"> &nbsp;&nbsp;&nbsp;&nbsp; 왕복 </span>		
 					
 				 </span>
 					
@@ -422,7 +422,7 @@ function roundwayOff()
 								 
 								<span style="font-weight: bold;">주요 출발지 : </span> 
 									<c:forEach items="${departureList}" var="dList">
-										<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> 	${dList}	</span>	
+										<span onclick="finishDpic('${dList}');" style="cursor: pointer;"> 	${dList}	|</span>	
 										<input type="hidden" value="${dList}">
 									</c:forEach>			
 									
@@ -477,7 +477,7 @@ function roundwayOff()
 								 
 								<span style="font-weight: bold;">주요 도착지 : </span> 
 									<c:forEach items="${arrivalList}" var="aList">
-										<span onclick="finishApic('${aList}');" style="cursor: pointer;">	${aList}	</span>
+										<span onclick="finishApic('${aList}');" style="cursor: pointer;">	${aList}	|</span>
 										<input type="hidden" value="${aList}">
 									</c:forEach>			
 									
