@@ -157,6 +157,14 @@
 		<c:forEach var="boardvo" items="${boardList}" varStatus="status"> 
 			<tr>
 				<td align="center">${boardvo.seq}</td>
+				
+				<!-- 최초 -->
+				<td>
+				<a href="<%= request.getContextPath() %>/jsb/recommendView.action?seq=${boardvo.seq}">${boardvo.subject }</a>
+				</td>
+				<!--  ===== -->
+				
+				
 				<td>
 	             <!-- ===== #126. 답변글인 경우 제목앞에 공백(여백)과 함께 Re 라는 글자를 붙이도록 한다. ===== -->
 	             <!-- 답변글이 아닌 원글인 경우 -->
@@ -195,6 +203,8 @@
 				
 			</tr>
 		</c:forEach>
+		
+		
 	</table>
 	<br/>
 	
