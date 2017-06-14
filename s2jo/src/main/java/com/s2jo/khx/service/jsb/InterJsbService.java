@@ -10,4 +10,8 @@ public interface InterJsbService {
 
 	List<BoardVO> recommendBoardList();//글보여주기(최초)
 
+	BoardVO getRecommendView(String seq); //글 1개 보여주기(최초)
+
+	BoardVO getRecViewWithNoAddCount(String seq); //조회수증가없이 글1개 보여주기
+
 }

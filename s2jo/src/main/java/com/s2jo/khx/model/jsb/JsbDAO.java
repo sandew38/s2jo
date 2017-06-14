@@ -27,5 +27,19 @@ public class JsbDAO implements InterJsbDAO{
 		return recommendBoardList;
 	}
 	
+	//글 1개를 볼때 조회수(readCount) 1증가 시키기 =====
+	@Override
+	public void setRecAddReadCount(String seq) {
+		sqlsession.update("jsb.setRecAddReadCount", seq);
+	}
+
+	// 글 1개 보여주는 BoardVO getRecommendView(String seq) 메소드 생성하기 =====
+	@Override
+	public BoardVO getRecommendView(String seq) {
+		BoardVO boardvo = sqlsession.selectOne("jsb.getRecommendView", seq);
+		return boardvo;
+	
+	}
+	
 
 }

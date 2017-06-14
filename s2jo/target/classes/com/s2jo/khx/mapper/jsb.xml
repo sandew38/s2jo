@@ -8,14 +8,13 @@
 
 
 	
-	<!--  
-	           #58. 글쓰기 부분을 주석처리한 후에 아래처럼 한다.
-	--> 
+	<!-- 글추가하기(초기) --> 
 	<insert id="recommendAdd" parameterType="com.s2jo.khx.model.jsb.BoardVO">
         insert into final_recommendBoard(seq, userid, name, subject, content, pw, readCount, regDate, status, groupno)
 		values(final_recommendBoard_Seq.nextval, 'asd', 'asd', 'asd', #{content}, 'asd', default, default, default, 1) 
 	</insert>
 	
+	<!-- 추천글리스트(초기) -->
 	<select id="recommendBoardList" resultType="com.s2jo.khx.model.jsb.BoardVO">
 		select seq, userid, name, subject, content, readCount 
 		     , to_char(regDate, 'yyyy-mm-dd hh24:mi:ss') as regDate
@@ -24,5 +23,18 @@
 		order by seq desc
 	</select>
 	
+	<!--  글 1개를 볼때 조회수(readCount) 1증가 시키기 ===== -->
+	<update id="setRecAddReadCount" parameterType="String">
+		update final_recommendBoard set readCount = readCount + 1 
+		where seq = #{seq}
+	</update>
+	
+	<!-- 글 1개 보여주기(최초) -->
+	<select id="getRecommendView" parameterType="String" resultType="com.s2jo.khx.model.jsb.BoardVO">
+		select seq, userid, name, subject, content, readCount 
+		     , to_char(regDate, 'yyyy-mm-dd hh24:mi:ss') as regDate
+		from final_recommendBoard
+		where status = 1 and seq = #{seq}
+	</select>
 	
 </mapper>
