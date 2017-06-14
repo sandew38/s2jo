@@ -63,6 +63,11 @@ values( 1, 102, 380);
 select *
 from final_traininfo;
 
+select case when traintype = 1 then 'KHX' 
+      else '무궁화' end
+from final_traininfo;
+
+
 commit;
 
 -- drop table final_runinfo;
@@ -425,7 +430,7 @@ from final_runinfo;
 CREATE TABLE final_seat (
 	seatseq VARCHAR2(20) NOT NULL, /* 좌석시퀀스 */
 	runinfoseq NUMBER NOT NULL, /* 운행코드번호 */
-	classno VARCHAR2(20) NOT NULL, /* 호차 */
+	classno VARCHAR2(20) NOT NULL, /* 호차 ( 특실 : 1~3호차  일반실 : 4~8호차)*/
 	seatno VARCHAR2(20) NOT NULL /* 좌석번호 */
 );
 
@@ -433,7 +438,7 @@ COMMENT ON COLUMN final_seat.seatseq IS '좌석시퀀스';
 
 COMMENT ON COLUMN final_seat.runinfoseq IS '운행코드번호';
 
-COMMENT ON COLUMN final_seat.classno IS '호차번호';
+COMMENT ON COLUMN final_seat.classno IS '호차번호 ( 특실 : 1~3호차  일반실 : 4~8호차) ';
 
 COMMENT ON COLUMN final_seat.seatno IS '좌석번호';
 

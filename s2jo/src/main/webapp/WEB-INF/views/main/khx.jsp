@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ 
 <style type="text/css">
 
 #oneway, #roundway
@@ -98,7 +105,11 @@
 	overflow: auto;	
 }
 
+
+
 </style>
+
+
 
 <script type="text/javascript">
 
@@ -116,14 +127,81 @@ $(document).ready(function(){
 	var traintype = $("#pictraintype option:selected").val();
 	$("#traintype").val(traintype);
 
-	// 기차 종류 선택시 
+	$("#vipselected").hide();
+  	$("#normalselected").hide();
+	
+  	
+// 기차 종류 선택시 
+// select로 고를 수 있게 한다. 
 	$("#pictraintype").change(function(event){
 	//	alert("변경됨!");
+		
+		$("#pictraintype").hide();
+	
 	 	var traintype = $("#pictraintype option:selected").val();
 	//	alert(traintype);	
+	
+		document.getElementById("finpictraintype").innerHTML = traintype;
 		$("#traintype").val(traintype);
 	}); // end of $("#pictraintype").change(function(event) ----
+		
+			
+// 열차 종류를 선택했다가 다시 클릭했을 때 
+// 종류를 재선택할 수 있게 한다.
+	$("#finpictraintype").click(function(){
+		
+		$("#pictraintype").show();
+		document.getElementById("finpictraintype").innerHTML = "";
+		$("#traintype").val("-1");
+		
+	}); // end of $("#finpictraintype").click(function() ----
 	
+
+//	특실 선택시
+	$("#vip").click(function(){
+		
+			$(this).hide();
+			$("#vipselected").show();	
+			
+			$("#normal").show();
+			$("#normalselected").hide();
+			
+			$("#trainclass").val("vip");
+
+	});
+
+//	일반실 선택시
+	$("#normal").click(function(){
+		
+			$(this).hide();
+			$("#normalselected").show();
+			
+			$("#vip").show();
+			$("#vipselected").hide();
+			
+			$("#trainclass").val("normal");
+
+	});
+			
+// 출발일자 선택시 
+	 $( "#calender" ).click(function(){
+		 
+		 $("#departuredatepicker").datepicker({
+			  dateFormat : 'yy/mm/dd',
+		      showButtonPanel: true,
+		      showMonthAfterYear : true
+		    });
+		 
+	//	 var departuredate = $("#departuredatepicker").val();
+	//      alert(departuredate);
+		 // 이거 안된다.
+		 
+	//	 $("#departuredate").val($("#departuredatepicker").val());	 
+	 });
+			
+
+			
+			
 });// end of $(document).ready(function() ----
 
 		
@@ -359,14 +437,47 @@ function goBooking()
 						<option value = "무궁화" > 무궁화호 </option>
 						<option value = "새마을" > 새마을호 </option>
 					</select>
+					
+					<span id = "finpictraintype" style="font-size: xx-large; color : #639EB0; font-weight: bold;">
+					
+					</span>
 				</div>
 				
 			</div>
 			
 			<!-- 특실, 일반실 선택 -->
-			<div style="clear: both; text-align: left; padding-left: 5%; margin-top: 2%;" class = "left trainclass">등급</div>
+			<div style="clear: both; text-align: left; padding-left: 5%; margin-top: 2%;" class = "left trainclass">
+				등급 <br/>
+				
+				<div align="center" style="vertical-align: top;" >
+				   <span id="vip" class="trainclass" >
+	                  특실<img src = "<%=request.getContextPath()%>/resources/images/vipseat.png"
+	                           alt="특실"  style="width: 12%; ">
+	               </span>   
+	               
+	               <span id="vipselected" class="trainclass" >
+	                  특실<img src = "<%=request.getContextPath()%>/resources/images/vipseat_selected.png"
+	                           alt="특실선택" style="width: 12%; ">
+	               </span>
+	               
+	               <span id="normal" class="trainclass" >
+	                  일반실<img src = "<%=request.getContextPath()%>/resources/images/normalseat.png"
+	                           alt="일반실" style="width: 12%; ">
+	               </span>
+	               <span id="normalselected" class="trainclass" >
+	                  일반실<img src = "<%=request.getContextPath()%>/resources/images/normalseat_selected.png"
+	                           alt="일반실선택" style="width: 12%; ">
+	               </span>
+	               <br/>
+				</div>		
+			
+			</div>
+		
+		
 		
 		</div>
+		
+		
 		
 		
 		<!-- 오른쪽 메뉴 -->
@@ -397,8 +508,14 @@ function goBooking()
 				
 			<!-- 편도일 경우 가는날 선택 -->
 			<div style="clear: both; width:96%; margin: 2%; margin-bottom: 1%; " class = "right singledeparture" >
-				<div style="float: left; width: 100%"  class = "departuredate singledeparture">
-					가는 날 
+				<div style="float: left;  text-align: left; padding-left: 5%; width: 100%"  class = "departuredate singledeparture">
+					가는 날 <br/>
+					
+ 					<span style="text-align: center;">
+						<input type="text" id = "departuredatepicker">
+						<a  id = "calender" ><img src = "<%= request.getContextPath() %>/resources/images/datepicker.png" style="width:10%;"></a>
+					</span>
+										
 				</div>
 			</div>
 			
@@ -432,7 +549,12 @@ function goBooking()
 	<br/><br/> 
 	arrival : <input type ="text" id = "arrival" name = "arrival" value ="-1">
 	<br/><br/> 
-	traintype : <input type ="text" id = "traintype" name = "traintype">
+	traintype : <input type ="text" id = "traintype" name = "traintype" value = "-1">
+	<br/><br/>
+	trainclass : <input type ="text" id = "trainclass" name = "trainclass" value = "-1">
+	<br/><br/>
+	departuredate : <input type="text" id="departuredate" name = "departuredate" value = "-1" >
+	
 </form>
     
 </div>
