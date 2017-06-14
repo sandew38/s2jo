@@ -1,5 +1,6 @@
 package com.s2jo.khx.hjs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,18 +51,35 @@ public class HjsController {
 	// >> Ajax
 	// ==== #js2. 기차역(시/도)별 관광정보 리스트 요청 ====
 	@RequestMapping(value="/hjs/sidoInfo.action", method={RequestMethod.POST})
-	public String sidoInfo(HttpServletRequest req){
+	@ResponseBody
+	public HashMap<String, String> sidoInfo(HttpServletRequest req) throws Exception{
+		
+		String SIDO = req.getParameter("SIDO");   // form_data 어떻게 불러오는지?
+		
+		System.out.println("확인 ==> " + SIDO);	// 서울특별시 나옴.
+		apiExplorer.tourInfo(SIDO);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("SIDO", SIDO);
 		
 		
-		System.out.println("메소드 테스트 ========================================");
+		// ==========================================================
+/*		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("SIDO", SIDO);
+		map.put("thumbnailFileName", thumbnailFileName);
 		
 		
+		String imgFilename = service.getLargeImgFilename(map); 
+		// spring_productimage 테이블에서 
+		// 제품번호(fk_prodseq), 썸네일파일명(thumbnailFileName)에 해당하는 imagefilename 컬럼의 값(201706110056542344396781698764.jpg) 가져오기 
 		
+		HashMap<String, String> returnmap = new HashMap<String, String>(); 
 		
+		returnmap.put("IMGFILENAME", imgFilename);
 		
-		
-		return "hjs/sidoInfo.tiles";
-		// /s2jo/src/main/webapp/WEB-INF/views/hjs/sidoInfo.jsp 파일을 생성한다
+		*/
+		return map;
 		
 	}// end of public String main(HttpServletRequest req) ----------------
 	

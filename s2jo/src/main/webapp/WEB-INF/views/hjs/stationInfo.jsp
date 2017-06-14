@@ -8,7 +8,7 @@
 
 	function stationInfo(SIDO) {
 		
-		form_data = SIDO;
+		form_data = {SIDO : SIDO};
 		
 		alert(form_data);
 		
