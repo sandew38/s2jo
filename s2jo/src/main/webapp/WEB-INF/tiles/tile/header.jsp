@@ -4,6 +4,14 @@
 <%-- ===== #37.  tiles 중 header 페이지 만들기  ===== --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style type="text/css">
+
+
+
+</style>
+
+
+
 <div align="right" style="text-align: right;">
 	<ul class="nav nav-tabs mynav" style="text-align: right;">
 		<li class="dropdown"><a class="dropdown-toggle"

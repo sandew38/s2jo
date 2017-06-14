@@ -16,6 +16,8 @@
 	font-size: 25pt;
 	margin: 1%; 
 	width : 96%;
+	
+	background-color: white;
 }
 
 
@@ -28,6 +30,9 @@
 	padding-top : 20px;
 	border-radius: 20px;
 	margin: 1%; 
+	
+	background-color: white;
+	opacity: 30%;
 }
 
 #leftside, #rightside
@@ -63,7 +68,35 @@
 }
 
 /*모달*/
-
+.white_content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.white_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.white_content > div {
+	position: absolute;
+	top: 25%;
+	left: 40%;
+	width: 30%;
+	height: 70%;
+/* 	padding: 16px; */
+	border: 2px solid #639EB0;
+	border-radius : 20px;
+	background-color: white;
+	overflow: auto;	
+}
 
 
 
@@ -75,7 +108,7 @@
 $(document).ready(function(){
 
 // 페이지 로드 시 
-	$(".oneway").hide();	//
+	$(".oneway").hide();	
 	$(".roundway_selected").hide();
 	$("#roundway").addClass("deselected");
 	$("#waytype").val("oneway");
@@ -88,12 +121,32 @@ $(document).ready(function(){
 	  
 }); // end of $(document).ready(function() ----
 
-/* 		
+		
+// 출발지 선택 모달
 function picdeparture()
 {
-  $('div.modal').modal();
+	location.href="#picdeparture";
 }
-		 */
+
+// 출발지 선택 후 닫기 
+function finishDpic(event)
+{
+	// 출발지 값을 넣어준다.
+}
+
+// 도착지 선택 후 닫기
+function finishDpic(event)
+{
+	// 도착지 값을 넣어준다.
+}
+
+// 그냥 닫기 
+function finishpic()
+{
+	// 여기서 값을 넣어주고 해야함.
+	location.href="#";	
+}
+
 function goBooking() 
 {
 	location.href="booking.action";
@@ -158,8 +211,8 @@ function roundwayOff()
 </script>
 
 <!-- content 전체 div -->
-<div align="center" style="border: solid gold 3px; min-height: 800px; ">
-	<div align="center" style="width:90%; margin: 0 auto; margin-top: 5%; margin-bottom: 40px;">
+<div align="center" style="border: solid gold 0px; height: 700px; ">
+	<div align="center" style="width:90%; margin: 0 auto; margin-bottom: 40px; color: white; font-weight: bold;">
 		<h2>즐거운 여행의 시작과 끝, KHX와 함께!</h2>
 
 	</div>
@@ -190,12 +243,9 @@ function roundwayOff()
 					
 			</div>
 			<div style="clear: both; margin-bottom : 3%; width : 96%;">
-				<div class="floatleft left departure" style="width:48%;" id = "choosedeparture"  data-target="#layerpop" data-toggle="modal" onclick="picdeparture();">
-				출발지 선택
-								
-								
-									
-					
+				<div class="floatleft left departure" style="width:48%;" id = "choosedeparture" onclick="picdeparture();" >
+					출발지 선택
+			
 				</div>
 				<div class="floatleft left arrival" style="width:48%; margin-left: 2%; margin-right: 0%;">도착지 선택</div>
 			</div>
@@ -260,7 +310,54 @@ function roundwayOff()
 
 
 
-
+		<!-- 출발지 선택 모달창 시작 -->				
+					<div class="white_content" id="picdeparture">
+				        <div align="center">				            
+				           <div style="clear: both; margin-bottom : 5%; width : 96%;">
+				           
+								<div class="floatleft left box-shadow" style="width:48%; border: 5px solid #639EB0;" id="choosedeparture" >
+									출발지 선택
+									
+								</div>
+								
+								<div class="floatleft left" style="width:48%; margin-left: 2%; margin-right: 0%;">
+									도착지 선택
+								</div>
+								
+							</div>
+							
+							<div style="clear: both; margin-top : 5%; width : 96%; border: 2px solid #639EB0; 
+								 height:10%; border-radius: 20px; text-align: center; padding-top : 4%;" align="center">
+								 
+								<span style="font-weight: bold;">주요 출발지 : </span> 
+									<c:forEach items="${departureList}" var="dList">
+										${dList}
+									</c:forEach>			
+									
+							</div>
+							
+							
+							<div style="clear: both; margin-top : 3%; margin-bottom:0%; margin-left: 0%; margin-right: 0%; width : 96%; 
+								 border: 2px solid #639EB0; height:60%; border-radius: 20px; 
+								 paddind-top: 3%; text-align: center;" align="center">
+								<ul style="list-style: none;">
+									<c:forEach items="${departureList}" var="dList">
+										<li>
+											<span onclick="finishDpic(${dList});"> ${dList}	</span>
+										</li>
+									</c:forEach>			
+								</ul>
+							</div>
+				            
+				           
+				           <div id = "close" onclick="finishpic();"
+				           		style="clear: both; cursor: pointer; font-size: 20; color: white; 
+				           		font-weight: bold; background-color: #639EB0; margin-top: 3%; width: 96%;" align="center" class="btn" >닫기</div>
+				           
+				           
+				        </div>
+				    </div>
+		<!-- 모달창 끝 -->
 
 
 

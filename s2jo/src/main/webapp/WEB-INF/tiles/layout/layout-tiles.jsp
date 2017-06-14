@@ -4,11 +4,31 @@
 <%-- ===== #35. tiles 를 사용하는 레이아웃 페이지 만들기  ===== --%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"  %>    
     
+<style type="text/css">
+
+#khxbackgroundimg 
+{
+
+	background:url("<%=request.getContextPath()%>/resources/images/khxbackground.png") no-repeat;
+	background-size: 100%;
+	width : 100%;
+	height: 100%;
+	
+}
+
+</style>
+
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>여행의 시작은 KHX와 함께</title>
+
+
+
+
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/BootStrapStudy/css/bootstrap.css">
@@ -17,9 +37,9 @@
   
   <style type="text/css">
   	#mycontainer	{ width:100%; margin:0 auto; padding:20px; }
-	#myheader		{ background-color:#639EB0; float:right; height:20%; width :75%; padding: 10px;}
-	#mycontent		{ background-color:#FFFFFF; float:left; width:75%; min-height:800px;  padding-top: 40px; border:1px solid #1CE3A9;}
-	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; height:78%; padding-top: 10px;}
+	#myheader		{ float:right; min-height:200px; width :75%; padding: 10px;}
+	#mycontent		{ float:left; width:75%; min-height:800px;  padding-top: 40px; border:0px solid #1CE3A9;}
+	#mysideinfo		{ background-color:#FFFFFF; float:left; width:25%; min-height:950px; padding-top: 10px;}
 	#myfooter		{ background-color:#000000; clear:both; height:20%; }
 	/* #displayRank 	{ margin:20px; height:200px;} */
 	
@@ -50,7 +70,8 @@
 		<div id="mysideinfo" style="border-left : 1px solid #1CE3A9; border-top: #1CE3A9 1px solid; border-bottom: #1CE3A9 1px solid;">
 			<tiles:insertAttribute name="sideinfo" />
 		</div>
-		
+
+<div id = "khxbackgroundimg">
 		<div id="myheader">
 			<tiles:insertAttribute name="header" />
 		</div>
@@ -58,7 +79,7 @@
 		<div id="mycontent">
 			<tiles:insertAttribute name="content" />
 		</div>
-	
+</div>		
 		<div id="myfooter">
 			<tiles:insertAttribute name="footer" />
 		</div>

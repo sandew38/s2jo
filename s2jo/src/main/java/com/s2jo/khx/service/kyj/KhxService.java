@@ -36,6 +36,16 @@ public class KhxService implements InterKhxService {
 		 
 	}
 
+// ==== 출발지 리스트를 알아오는 메소드 
+	@Override
+	public List<String> departureList() {
+		
+		 List<String> departureList = kdao.departureList();
+		 
+		 return departureList;
+	}	
+
+	
 // ==== 열차 운행 정보 알아오는 메소드
 
 	@Override
@@ -44,6 +54,6 @@ public class KhxService implements InterKhxService {
 		List<TrainviewVO> trainList = kdao.trainList();
 		
 		return trainList;
-	}	
+	}
 	
 } // end of public class BoardService implements InterBoardService ----

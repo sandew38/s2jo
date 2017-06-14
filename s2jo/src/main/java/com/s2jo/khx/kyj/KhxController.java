@@ -53,6 +53,10 @@ public class KhxController {
 		
 		public String index(HttpServletRequest req)
 		{
+			// 출발지 목록 가져오기
+			List<String> departureList = service.departureList();
+			
+			req.setAttribute("departureList", departureList);
 			
 			return "main/khx.tiles";
 //			└> /Board/src/main/webapp/WEB-INF/views/main/khx.jsp 파일을 생성한다.

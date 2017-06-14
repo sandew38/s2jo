@@ -855,3 +855,9 @@ ALTER TABLE final_userloss
 		);
 
 commit;
+
+
+select DISTINCT(departure)
+from final_runinfo;
+
+

@@ -22,9 +22,12 @@ table tr td
 </style>
     
     
-<div style="width: 100%; height: 90%; " align="center">
+<div style="width: 100%; height: 96%; background-color: white;" align="center">
 	<div id = "outer" style="width: 80%; height: 90%; border: 0px #1CE3A9 solid; " align="center">
+	
+		<br/><br/>
 		<h3 style="font-weight: bold;">배차조회</h3>
+		<br/><br/>
 		
 		<div id = "infobox" style="float: left; border: 0px #1CE3A9 solid; width: 35%; height: 98%;" >
 		
