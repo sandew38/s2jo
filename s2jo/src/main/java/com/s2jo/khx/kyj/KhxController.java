@@ -34,7 +34,7 @@ import oracle.net.aso.b;
 // XML에서 bean을 만드는 대신에
 // 클래스명 앞에 @Component 어노테이션을 쓰면
 // 해당 클래스는 bean으로 자동 등록된다.
-// 그리고 bean의 id는 해당 클래스명이 된다. (첫 글자는 소문자)
+// 그리고 bean의 id는 해당 클래스명이 된다. (첫 글자는 소문자)    
 
 public class KhxController {
 
