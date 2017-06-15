@@ -513,7 +513,8 @@ CREATE TABLE final_ticketdetail (
 	seatseq VARCHAR2(20) NOT NULL, /* 좌석시퀀스 */
 	orderstatus VARCHAR2(20) NOT NULL /* 예약여부 */
 );
-
+select *
+from final_ticketdetail;
 COMMENT ON COLUMN final_ticketdetail.ticketno IS '좌석이 선택가능한 지 여기서 알 수 있음
 기차코드번호_운행코드번호_날짜 (K_1h_1_20170609)';
 
@@ -866,7 +867,7 @@ select *
 from final_nonmember;
 
 commit;
---**로그인여부 확인
+--** 비회원 로그인여부 확인
  	  select case( select count(*)
 	               from final_nonmember
 	               where nhp = '01052498336' )
@@ -913,6 +914,12 @@ CREATE TABLE final_member (
 insert into final_member (userid, name, pwd, email,joindate, status, birthday)
 values('dnjswp94','유원제','qwer1234$','dnjswp94@naver.com', default,default,'940916');
 
+select *
+from final_member;
+update final_member set gender = '1'
+where userid in 'jjanson91';
+
+
 commit;
 
 COMMENT ON TABLE final_member IS '회원가입 테이블//모든 정보의 기본!';
@@ -958,3 +965,29 @@ ALTER TABLE final_member
     
 select * from user_tables;
 
+--**정회원 로그인 여부 확인
+ select case( select count(*)
+	               from final_member
+	               where userid = 'jjanson91' )
+	         when 1 then 1
+	         else( case(select count(*) 
+	                    from final_member
+	                    where userid = 'jjanson91')
+	               when 1 then 0
+	               else -1
+	               end
+	             )
+	         end as LOGINCHECK
+	  from dual;
+    
+    select *
+    from final_member;
+    	   select nonno, nhp, npwd, status
+	   from final_nonmember
+	   where status = 1 and nhp = '01052498336';
+
+--정회원 로그인 완료요청!
+select userid, name, pwd, email, hp, post, addr1, addr2, to_char(joindate, 'yyyy-mm-dd') as joindate
+      , status, birthday, gender
+	   from final_member
+	   where status = 1 and userid = 'jjanson91';

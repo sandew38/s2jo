@@ -17,6 +17,70 @@
 	       	
 	.nonmyfont {font-size: 14pt;}
 	
+@media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.omb_login .omb_authTitle {
+    text-align: center;
+	line-height: 300%;
+}
+	
+.omb_login .omb_socialButtons a {
+	color: white; // In yourUse @body-bg 
+	opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+    color: white;
+	opacity:1;    	
+}
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+
+.omb_login .omb_loginOr {
+	position: relative;
+	font-size: 1.5em;
+	color: #aaa;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -0.6em;
+	margin-left: -1.5em;
+	background-color: white;
+	width: 3em;
+	text-align: center;
+}			
+
+.omb_login .omb_loginForm .input-group.i {
+	width: 2em;
+}
+.omb_login .omb_loginForm   {
+    color: red;
+}
+
+	
+@media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+		margin-top:10px;
+ 	}		
+}
 </style>
 
 <script type="text/javascript">
@@ -66,6 +130,8 @@
   			alert("비회원 로그인 성공!1");
 
  		}); // end of $("#btnLOGIN").click();-----------------------
+
+ 		
  		
  		
  		$("#npwd").keydown(function(event){
@@ -109,48 +175,78 @@
 
 </script>
 
-<div style="background-color:white; width:100%; height:100%; margin: auto; border: solid 5px red;">
 
-	<div align="center" style="vertical-align:center; width:80%; margin:10%; height:70%; border: solid 5px blue;">
-			<h2 class="text-primary" style="color: #639EB0; font-weight: bold;">비회원 로그인</h2>
-			<p style="font-size:8px; "><span style="color: #639EB0">통합 예매 홈페이지</span>는 네이버 회원 아이디와 비밀번호로 이용이 가능합니다.</p>
-			<p class="bg-primary">&nbsp;</p>
+
+
+
+<div style="background-color:white; width:100%; height:100%; margin: auto; border: solid 0px red; padding-top: 100px;" >
+
+    <div class="omb_login">
+    	<h3 class="omb_authTitle">비회원로그인 or <a href="#">회원가입</a></h3>
+		<div class="row omb_row-sm-offset-3 omb_socialButtons">
+    	    <div class="col-xs-4 col-sm-2">
+    	    	<a class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span href="<%=request.getContextPath() %>/nonloginform.action" class="hidden-xs btn btn-lg">비회원 로그인</span>
+			    </a>
+	        </div>
+        	<div class="col-xs-4 col-sm-2">
+		        <a href="<%=request.getContextPath() %>/loginform.action" class="btn btn-lg btn-block omb_btn-twitter">
+			        <i class="fa fa-twitter visible-xs"></i>
+			        <span class="hidden-xs btn btn-lg">정회원 로그인</span>
+		        </a>
+	        </div>	
+        	<div class="col-xs-4 col-sm-2">
+<%-- 		        <a href="<%=request.getContextPath() %>/loginform.action" class="btn btn-lg btn-block omb_btn-google">
+ --%>
+		        <a class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs btn btn-lg">네이버아이디로그인</span>
+		        </a>
+	        </div>	
+		</div>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
+			<p align="center" style="font-size:14px;"><span style="color: #639EB0">통합 예매 홈페이지</span>는 네이버 회원 아이디와 비밀번호로 이용이 가능합니다.</p>
+		<br/>
+		<form name="nonloginFrm" id="nonloginFrm" class="nonloginFrm">
+			<div class="row omb_row-sm-offset-3">
+				<div class="col-xs-12 col-sm-6">	
+				    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" class="form-control" name="nhp" id="nhp" placeholder="전화번호">
+						</div>
+						<span class="help-block"></span>
+											
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+							<input  type="password" class="form-control" name="npwd" id="npwd" placeholder="비밀번호">
+						</div>
+		<br/><br/>
+						<button class="btn btn-lg btn-primary btn-block" type="button" id="btnNonLOGIN">Login</button>
+					</form>
+				</div>
+	    	</div>
+		</form>
 			
-			<form name="nonloginFrm" id="nonloginFrm" class="nonloginFrm">
-				<div class="nonmydiv" style="margin-left: 10%; margin-top:10%; float:left;">
-	
-						<input class="nonmydisplay form-control" type="text" name="nhp" id="nhp" size="80px;" style="height: 50px;"  placeholder="010xxxxxxxx"/>
-						<input class="nonmydisplay form-control" type="text" name="npwd" id="npwd" size="80px;" style="height:50px; margin-right: 20px; margin-top: 40px;"  placeholder="2134"/>
-	
-				</div>
-				
-				<div class="nonmydiv" style="margin-left:20px; margin-top:10%; float:left;">
-					<button class="btn btn-success" style="vertical-align:center; height:125px; width: 120px; font-size: 14pt;" type="button" id="btnNonLOGIN" >로그인</button> 
-				</div>
-							
-				
-			</form>
-			<div>아이디 찾기</div>
-				<div>비밀번호 찾기</div>
-		</div>
-		<div>
-			네이버 통합회원으로 가입하시면 홈페이지와 예매내역 공유로 더욱 편리한 기차 이용이 가능합니다.  <a>통합회원가입</a>
-		</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox" style="margin-left: 20px;">
+					<input type="checkbox" value="remember-me">Remember ID
+				</label>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<p class="omb_forgotPwd" >
+					<a href="#">Forgot password?</a>
+				</p>
+			</div>
+		</div>	    	
+	</div>
 </div>
 
-
-
-
-  <!-- 		로그인 2안
-			<div class="nonmydiv" style="margin-left: 10%;">
-				<strong>전화번호</strong>
-					<label style="background-color: red;">
-						<input type="text" id="nhp" name="nhp" >
-					</label>
-			</div>
-			<div class="nonmydiv" style="margin-left: 10%;">
-				<strong>암    호 </strong>
-					<input type="text" id="npwd" name="npwd" placeholder="1234">
-			</div>
-			 -->
-  

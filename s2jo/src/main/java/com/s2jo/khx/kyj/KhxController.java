@@ -74,6 +74,27 @@ public class KhxController {
 	
 	public String booking(HttpServletRequest req)
 	{
+		
+		String waytype = req.getParameter("waytype");
+		String departure = req.getParameter("departure");
+		String arrival = req.getParameter("arrival");
+		String traintype = req.getParameter("traintype");
+		String trainclass = req.getParameter("trainclass");
+		String departuredate = req.getParameter("departuredate");
+		String arrivaldate = req.getParameter("arrivaldate");
+		
+		
+		System.out.println("waytype : " + waytype);	
+		System.out.println("departure : " + departure);	
+		System.out.println("arrival : " + arrival);	
+		System.out.println("traintype : " + traintype);	
+		System.out.println("trainclass : " + trainclass);	
+		System.out.println("departuredate : " + departuredate);	
+		System.out.println("arrivaldate : " + arrivaldate);	
+		
+		
+		
+		
 		List<TrainviewVO> trainList = service.trainList();
 		
 		req.setAttribute("trainList", trainList);

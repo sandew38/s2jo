@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.s2jo.khx.model.psc.khxpscMemberVO;
 import com.s2jo.khx.model.psc.khxpscNonMemberDAO;
 import com.s2jo.khx.model.psc.khxpscNonMemberVO;
 
@@ -33,8 +34,20 @@ public class khxNonMemberService implements InterkhxNonMemberService {
 		khxpscNonMemberVO nonloginuser = knmdao.getNonLoginEnd(nhp);
 		return nonloginuser;
 	}
+	
+	@Override//정회원 로그인여부 확인
+	public int loginEnd(HashMap<String, String> map) {
+		int n= knmdao.loginEnd(map);
+		return n;
+	}
 
- 
+	@Override//정회원 로그인완료 요청
+	public khxpscMemberVO getLoginEnd(String userid) {
+		khxpscMemberVO loginuser = knmdao.getLoginEnd(userid);
+		return loginuser;
+	}
+	
+	
 
 	
 	

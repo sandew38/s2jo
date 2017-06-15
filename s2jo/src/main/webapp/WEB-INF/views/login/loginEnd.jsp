@@ -6,7 +6,7 @@
 <script type="text/javascript">
 		<c:if test="${n == 1 && empty url}">
 			alert("로그인 성공 !!");
-			location.href="<%= request.getContextPath() %>/index.action";       
+			location.href="<%= request.getContextPath()%>";       
 		</c:if>
 		
 		<c:if test="${n == 1 && not empty url}">

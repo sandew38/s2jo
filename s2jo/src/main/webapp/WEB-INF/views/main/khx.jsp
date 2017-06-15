@@ -125,7 +125,7 @@ $(document).ready(function(){
 	$(".singledeparture").show();
 	
 	var traintype = $("#pictraintype option:selected").val();
-	$("#traintype").val(traintype);
+	$("#traintype").val(traintype);	
 
 	$("#vipselected").hide();
   	$("#normalselected").hide();
@@ -183,25 +183,101 @@ $(document).ready(function(){
 
 	});
 			
-// 출발일자 선택시 
-	 $( "#calender" ).click(function(){
+// 캘린더 선택시 
+/* 	 $( "#calender" ).click(function(){
 		 
-		 $("#departuredatepicker").datepicker({
+		 $(this).datepicker({
 			  dateFormat : 'yy/mm/dd',
 		      showButtonPanel: true,
 		      showMonthAfterYear : true
-		    });
+		    }); 
+	 });	*/
+	 
+// 출발일자 선택 (편도) 
+	 $("#departuredatepicker").datepicker({
+		  dateFormat : 'yy/mm/dd',
+	      showButtonPanel: true,
+	      showMonthAfterYear : true
+	      
+	    });
+		 
+// 출발일자 선택 (왕복) 
+	 $("#departuredatepickerR").datepicker({
+		  dateFormat : 'yy/mm/dd',
+	      showButtonPanel: true,
+	      showMonthAfterYear : true
+	      
+	    });
+// 도착일자 선택 (왕복)
+	 $("#arrivaldatepickerR").datepicker({
+		  dateFormat : 'yy/mm/dd',
+	      showButtonPanel: true,
+	      showMonthAfterYear : true
+	      
+	    });
+	 
 		 
 	//	 var departuredate = $("#departuredatepicker").val();
 	//      alert(departuredate);
 		 // 이거 안된다.
 		 
 	//	 $("#departuredate").val($("#departuredatepicker").val());	 
-	 });
 			
+	$("#departuredatepicker").change(function(){
+		
+		
+		if($("#waytype")=="oneway")
+		{
+			alert("편도다");			
+		}
+		
+		// 출발일자 넣어주고 조회하기로 넘어간다.
+		var departuredate = $("#departuredatepicker").val();
+		$("#departuredate").val(departuredate);
+		
+		var departuredateR = $("#departuredatepickerR").val();
+		$("#departuredate").val(departuredateR);
+		
+		var arrivaldate = $("#arrivaldatepickerR").val();
+		$("#arrivaldate").val(arrivaldate);
+		
+	});
+		 
+		 
+	$("#today").click(function(){
+		
+	    var date = new Date();
 
+	    var year  = date.getFullYear();
+	    var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+	    var day   = date.getDate();
+
+	    if (("" + month).length == 1) { month = "0" + month; }
+	    if (("" + day).length   == 1) { day   = "0" + day;   }
+		
+	    $("#departuredatepicker").val(year+"/"+month+"/"+day);
+		
+	    $("#departuredate").val(year+"/"+month+"/"+day);
+	    
+	});
 			
-			
+	$("#tomorrow").click(function(){
+		
+	    var date = new Date();
+
+	    var year  = date.getFullYear();
+	    var month = date.getMonth() + 1; // 0부터 시작하므로 1더함 더함
+	    var day   = date.getDate()+1;
+
+	    if (("" + month).length == 1) { month = "0" + month; }
+	    if (("" + day).length   == 1) { day   = "0" + day;   }
+		
+	    $("#departuredatepicker").val(year+"/"+month+"/"+day);		
+	    
+	    $("#departuredate").val(year+"/"+month+"/"+day);
+	    
+	});
+	
 });// end of $(document).ready(function() ----
 
 		
@@ -249,7 +325,7 @@ function finishDpic(event)
 		document.getElementById("departurefromM").innerHTML = event;
 		
 		// 출,도착지 창을 닫는다.
-		location.href="#";	
+		location.href="#picarrival";	
 		
 	} // end of if ----	
 } // end of function finishDpic(event) ----
@@ -317,6 +393,8 @@ function roundway(event)
 	roundwayOn();
 	onewayOff();	
 	$("#waytype").val("roundway");
+	$("#departuredatepickerR").val($("#departuredatepicker").val());
+	$("#arrivaldatepickerR").val($("#departuredatepicker").val());
 	
 	$(".singledeparture").hide();
 	$(".doubledeparture").show();
@@ -355,13 +433,54 @@ function roundwayOff()
 	$(".roundway").show();
 }
 
-
-
-
 //조회하기
 function goBooking() 
 {
-	location.href="booking.action";
+	var waytype = $("#waytype").val();
+	var departure = $("#departure").val();
+	var arrival = $("#arrival").val();
+	var traintype = $("#traintype").val();
+	var trainclass = $("#trainclass").val();
+
+	
+	if(departure == -1)
+	{
+		alert("출발지를 선택하세요!");
+		return;
+	}
+	
+	else if(arrival == -1)
+	{
+		alert("도착지를 선택하세요!");
+		return;
+	}
+	
+	else if(traintype=="기차 종류를 선택해주세요.")
+	{
+		alert("기차 종류를 선택하세요!");
+		return;
+	}
+	
+	else if(trainclass == -1)
+	{
+		alert("등급을 선택하세요!");
+		return;
+	}
+
+	else if(departuredate == -1 || departuredate=="")
+	{
+		alert("가는날짜를 선택해주세요!");
+		return;
+	}
+	
+	var browseForm = document.browseForm;
+	browseForm.method = "get";
+	browseForm.action = "booking.action";
+	
+	browseForm.submit();
+	
+	// 조회 페이지로 넘어감
+//	location.href="booking.action";
 }
 
 
@@ -432,10 +551,10 @@ function goBooking()
 				<!-- 기차 선택 select -->
 				<div align="center" style="text-align: center;">
 					<select id="pictraintype" style="text-align: right; width:60%; height: 60%; border-collapse: collapse; border-style: none; font-size: large;">
-						<option value = "-1" selected> 기차 종류를 선택해주세요. </option>
+						<option selected> 기차 종류를 선택해주세요. </option>
 						<option value = "KHX" > KHX </option>
-						<option value = "무궁화" > 무궁화호 </option>
-						<option value = "새마을" > 새마을호 </option>
+						<option value = "무궁화호" > 무궁화호 </option>
+						<option value = "새마을호" > 새마을호 </option>
 					</select>
 					
 					<span id = "finpictraintype" style="font-size: xx-large; color : #639EB0; font-weight: bold;">
@@ -511,22 +630,64 @@ function goBooking()
 				<div style="float: left;  text-align: left; padding-left: 5%; width: 100%"  class = "departuredate singledeparture">
 					가는 날 <br/>
 					
- 					<span style="text-align: center;">
-						<input type="text" id = "departuredatepicker">
-						<a  id = "calender" ><img src = "<%= request.getContextPath() %>/resources/images/datepicker.png" style="width:10%;"></a>
-					</span>
-										
+					<div align="left">
+						
+						<div style="float: left; border: 0px solid black; margin-left :5%; width: 18%; text-align: right;">
+							<label for = "departuredatepicker">
+								<img src = "<%= request.getContextPath() %>/resources/images/datepicker.png" style="width:50%;">
+							</label> 
+						</div>
+						
+						<div style="float: left; border: 0x solid black; width: 70%;">
+							<input type="text" id = "departuredatepicker" style="width: 50%; text-align: center; height: 60%; font-size: large;">
+							&nbsp;						
+							<span id="today" style="cursor: pointer; font-size: large;">오늘</span> &nbsp;
+							<span id="tomorrow" style="cursor: pointer; font-size: large;">내일</span>
+						</div>
+						
+					</div>				
+					
 				</div>
 			</div>
 			
 			<!-- 왕복일 경우 가는날, 오는날 선택 -->
 			<div style="clear: both; height: 100px; margin: 1%;  margin-bottom: 3%;" class = "doubledeparture" >
-				<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
-					가는 날 
+				<div style="float: left; width:48%; text-align: left; padding-left: 5%;"  class = "right departuredate doubledeparture">
+					가는 날 <br/>
+					
+					<div align="left">
+						
+						<div style="float: left; border: 0px solid black; margin-left :5%; width: 20%; text-align: right;">
+							<label for = "departuredatepickerR">
+								<img src = "<%= request.getContextPath() %>/resources/images/datepicker.png" style="width:100%;">
+							</label> 
+						</div>
+						
+						<div style="float: left; border: 0x solid black; width: 65%; vertical-align: bottom;">
+							<input type="text" id = "departuredatepickerR" style="width: 90%; text-align: center; height: 56%; font-size: medium;">
+						</div>
+						
+					</div>	 
 				</div>
 			
-				<div style="float: left; width:48%;" class = "right departuredate doubledeparture">
-					오는 날 
+				<div style="float: left; width:48%; text-align: left; padding-left: 5%; " class = "right departuredate doubledeparture">
+					오는 날 <br/>
+					
+					<div align="left">
+						
+						<div style="float: left; border: 0px solid black; margin-left :5%; width: 20%; text-align: right;">
+							<label for = "arrivaldatepickerR">
+								<img src = "<%= request.getContextPath() %>/resources/images/datepicker.png" style="width:100%;">
+							</label> 
+						</div>
+						
+						<div style="float: left; border: 0x solid black; width: 65%; vertical-align: bottom;">
+							<input type="text" id = "arrivaldatepickerR" style="width: 90%; text-align: center; height: 56%; font-size: medium;">
+						</div>
+						
+					</div>	 
+					
+					
 				</div>
 			</div>
 				
@@ -541,19 +702,22 @@ function goBooking()
 
 
 <!-- 넘겨줄 폼 -->
-<form id = "browseForm">
+<form name = "browseForm">
 	<br/><br/> 
-	waytype : <input type="text" id ="waytype" name = "waytype">
+	<!-- waytype :  --><input type="hidden" id ="waytype" name = "waytype">
 	<br/><br/> 
-	departure : <input type ="text" id = "departure" name = "departure" value = "-1">
+	<!-- departure :  --><input type ="hidden" id = "departure" name = "departure" value = "-1">
 	<br/><br/> 
-	arrival : <input type ="text" id = "arrival" name = "arrival" value ="-1">
+	<!-- arrival :  --><input type ="hidden" id = "arrival" name = "arrival" value ="-1">
 	<br/><br/> 
-	traintype : <input type ="text" id = "traintype" name = "traintype" value = "-1">
+	<!-- traintype :  --><input type ="hidden" id = "traintype" name = "traintype" value = "-1">
 	<br/><br/>
-	trainclass : <input type ="text" id = "trainclass" name = "trainclass" value = "-1">
+	<!-- trainclass :  --><input type ="hidden" id = "trainclass" name = "trainclass" value = "-1">
 	<br/><br/>
-	departuredate : <input type="text" id="departuredate" name = "departuredate" value = "-1" >
+	<!-- departuredate :  --><input type="text" id="departuredate" name = "departuredate" value = "-1" >
+	<br/><br/>
+	<!-- arrivaldate :  --><input type="text" id="arrivaldate" name = "arrivaldate" value = "-1" >	
+	
 	
 </form>
     
@@ -669,7 +833,6 @@ function goBooking()
         </div>
     </div>
 
-<!-- 기차 종류 선택 모달창 -->
 
 
 

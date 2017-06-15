@@ -8,7 +8,7 @@
 
 
 	
-	<!-- ===== #48. 비회원 로그인 여부 알아오기 ===== -->
+	<!-- ===== #1. 비회원 로그인 여부 알아오기 ===== -->
 	<select id="nonloginEnd" parameterType="java.util.HashMap" resultType="int"> 
  	  select case( select count(*)
 	               from final_nonmember
@@ -26,13 +26,42 @@
 	</select>
 	
 	
-	<!-- ===== #51. 로그인 성공한 비회원 정보 가져오기 ===== -->
+	<!-- ===== #2. 로그인 성공한 비회원 정보 가져오기 ===== -->
 
 	<select id="getNonLoginEnd" parameterType="String" resultType="com.s2jo.khx.model.psc.khxpscNonMemberVO"> 
 	   select nonno, nhp, npwd, status
 	   from final_nonmember
 	   where status = 1 and nhp = #{nhp}
 	</select>
+
+	
+		
+	<!-- ===== #3. 정회원 로그인 여부 알아오기 ===== 		-->
+	<select id="loginEnd" parameterType="java.util.HashMap" resultType="int"> 
+ 	select case( select count(*)
+	               from final_member
+	               where userid = #{userid} )
+	         when 1 then 1
+	         else( case(select count(*) 
+	                    from final_member
+	                    where userid = #{userid})
+	               when 1 then 0
+	               else -1
+	               end
+	             )
+	         end as LOGINCHECK
+	  from dual
+	</select>
+	
+	<!-- ===== #4. 정회원 로그인 완료요청! ===== 		-->
+	<select id="getLoginEnd" parameterType="String" resultType="com.s2jo.khx.model.psc.khxpscMemberVO"> 
+	   select userid, name, pwd, email, hp, post, addr1,
+			addr2, to_char(joindate, 'yyyy-mm-dd') as joindate, status, birthday,  gender
+	   from final_member
+	   where status = 1 and userid = #{userid}
+	</select>
+
+	
 	
 </mapper>
 
