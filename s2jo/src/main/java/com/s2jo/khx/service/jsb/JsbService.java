@@ -1,5 +1,6 @@
 package com.s2jo.khx.service.jsb;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,24 @@ public class JsbService implements InterJsbService{
 	//  글 1개를 보여주는(조회수 1증가 없이) 서비스단 BoardVO getView(String seq) 메소드 생성하기 =====
 	@Override
 	public BoardVO getRecViewWithNoAddCount(String seq) {
-BoardVO boardvo = dao.getRecommendView(seq); // 글 1개를 보여주는것
+			BoardVO boardvo = dao.getRecommendView(seq); // 글 1개를 보여주는것
 		
 		return boardvo;
 	}
+
+	// =====  1개글 수정하기 ===== 
+	@Override
+	public int recommendEdit(HashMap<String, String> map) {
+			
+			
+			int n = 0;
+			
+		
+			n = dao.recUpdateContent(map); // 글 1개 수정하기 
+	
+			
+			return n;
+			
+		}
 
 }

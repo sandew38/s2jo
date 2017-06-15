@@ -1,5 +1,6 @@
 package com.s2jo.khx.model.jsb;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -39,6 +40,12 @@ public class JsbDAO implements InterJsbDAO{
 		BoardVO boardvo = sqlsession.selectOne("jsb.getRecommendView", seq);
 		return boardvo;
 	
+	}
+
+	//글 수정하기
+	public int recUpdateContent(HashMap<String, String> map) {
+		int n = sqlsession.update("jsb.recUpdateContent", map);
+		return n;
 	}
 	
 

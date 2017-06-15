@@ -1,6 +1,7 @@
 package com.s2jo.khx.jsb;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -126,6 +127,97 @@ public class JsbController {
 	    	return "jsb/board/recommend/recommendView.tiles";
 	    	// /Board/src/main/webapp/WEB-INF/views2/board/view.jsp 파일을 생성한다.
 	    }    
+	 
+	 	
+	// ===== #70. 글수정 페이지 요청 =====
+	    @RequestMapping(value="jsb/recommendEdit.action", method={RequestMethod.GET})
+	    public String requireLogin_edit(HttpServletRequest req, HttpServletResponse res, HttpSession session) { 
+	    	
+	    	// 글 수정해야할 글번호 가져오기
+	    	String seq = req.getParameter("seq");
+	    	
+	    	// 글 수정해야할 글전체 내용 가져오기
+	    	BoardVO boardvo = service.getRecViewWithNoAddCount(seq);
+	    	// 조회수(readCount) 1증가 없이 그냥 글 1개를 가져오는 것
+	    
+	    /*	MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+	    	
+	    	if(loginuser != null &&
+	    	  !loginuser.getUserid().equals(boardvo.getUserid())) {
+	    		String msg = "다른 사용자의 글은 수정이 불가합니다.";
+	    		String loc = "javascript:history.back()";
+	    		
+	    		req.setAttribute("msg", msg);
+	    		req.setAttribute("loc", loc);
+	    		
+	    		return "msg.notiles";
+	    		// /Board/src/main/webapp/WEB-INF/viewsnotiles/msg.jsp 파일을 생성한다.
+	    	}
+	    	else if(loginuser != null &&
+	    	        loginuser.getUserid().equals(boardvo.getUserid())){
+	    		// 가져온 1개글을 request 영역에 저장시켜서 view 단 페이지로 넘긴다.
+	    		req.setAttribute("boardvo", boardvo);
+	    		
+	    		return "board/edit.tiles2";
+	    		// /Board/src/main/webapp/WEB-INF/views2/board/edit.jsp 파일을 생성한다.
+	    	}
+	    	else {
+	    		String msg = "먼저 로그인부터 하세요.";
+	    		String loc = "/board/login.action";
+	    		
+	    		req.setAttribute("msg", msg);
+	    		req.setAttribute("loc", loc);
+	    		
+	    		return "msg.notiles";
+	    	}
+	    */	
+	    	
+	    	//MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+	    	/*
+	    	if(!loginuser.getUserid().equals(boardvo.getUserid()) ) { 
+	    		String msg = "다른 사용자의 글은 수정이 불가합니다.";
+	    		String loc = "javascript:history.back()";
+	    		
+	    		req.setAttribute("msg", msg);
+	    		req.setAttribute("loc", loc);
+	    		
+	    		return "msg.notiles";
+	    		// /Board/src/main/webapp/WEB-INF/viewsnotiles/msg.jsp 파일을 생성한다.	
+	    	}
+	    	else {*/
+	    		req.setAttribute("boardvo", boardvo);
+	    		
+	    		return "jsb/board/recommend/recommendEdit.tiles";
+	    		// /Board/src/main/webapp/WEB-INF/views2/board/edit.jsp 파일을 생성한다.
+	    	//}
+	    	
+	    } 
+	    
+	 //  글수정 페이지 완료하기 =====
+	    @RequestMapping(value="jsb/recommendEditEnd.action", method={RequestMethod.POST})
+	    public String editEnd(BoardVO boardvo, HttpServletRequest req) { 
+	    	
+	    	HashMap<String, String> map = new HashMap<String, String>();
+	    	map.put("seq", boardvo.getSeq());
+	    	map.put("subject", boardvo.getSubject());
+	    	map.put("content", boardvo.getContent());
+	    	
+	    	/*
+	    	 글수정을 하려면 원본글의 암호와 수정시 입력해주는 암호가 일치할때만 수정이 가능하도록 한다.
+	    	 서비스단에서 글수정을 처리한 결과를 int 타입으로 받아오겠다. 
+	    	 */
+	    	int n = service.recommendEdit(map);
+	    	// 넘겨받은 값이 1이면 update 성공,
+	    	// 넘겨받은 값이 0이면 update 실패(암호가 틀리므로).
+	    	
+	    	// n(글수정 성공 또는 실패)값을 request 영역에 저장시켜서 view 단 페이지로 넘긴다.
+	    	// 그리고 변경되어진 글을 보여주기 위해서 request 영역에 변경한 글번호도 저장시키도록 한다.
+	    	req.setAttribute("n", n);
+	    	req.setAttribute("seq", boardvo.getSeq()); // 수정된 자신의 글을 보여주기 위해서 넘긴다.
+	    	
+	    	return "jsb/board/recommend/recommendEditEnd.tiles";
+	    	// /Board/src/main/webapp/WEB-INF/views2/board/editEnd.jsp 파일을 생성한다.
+	    } 
 	 
 	 
 	

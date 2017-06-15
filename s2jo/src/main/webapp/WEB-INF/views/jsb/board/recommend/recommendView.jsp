@@ -74,8 +74,8 @@
 	</table>
 	
 	<br/>
-	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/list.action'">목록보기</button>
-	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/edit.action?seq=${boardvo.seq}'">수정</button>
+	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendList.action'">목록보기</button>
+	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendEdit.action?seq=${boardvo.seq}'">수정</button>
 	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/del.action?seq=${boardvo.seq}'">삭제</button>
 		
 		

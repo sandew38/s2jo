@@ -37,4 +37,12 @@
 		where status = 1 and seq = #{seq}
 	</select>
 	
+	<!-- =====  글 1개 수정하기 ===== -->
+	<update id="recUpdateContent" parameterType="java.util.HashMap">
+		update final_recommendBoard set subject = #{subject}
+		                         , content = #{content}
+	    where seq = #{seq}
+	</update>
+	
+	
 </mapper>
