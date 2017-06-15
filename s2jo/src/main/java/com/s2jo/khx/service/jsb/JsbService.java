@@ -5,8 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.s2jo.khx.model.jsb.BoardVO;
+import com.s2jo.khx.model.jsb.CommentVO;
 import com.s2jo.khx.model.jsb.JsbDAO;
 
 
@@ -63,6 +67,39 @@ public class JsbService implements InterJsbService{
 			
 			return n;
 			
+		}
+
+	//  1개 글삭제하기 =====	
+	@Override
+	public int recommendDel(HashMap<String, String> map) {
+		int n = dao.recDelContent(map); // 글 1개 삭제(수정으로 처리)하기
+		
+		return n;
+	}
+
+	//댓글쓰기
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED, isolation= Isolation.READ_COMMITTED, rollbackFor={Throwable.class})
+	public int recAddComment(CommentVO commentvo) 
+		throws Throwable {
+		
+		int n = 0;
+		n = dao.recAddComment(commentvo);
+		
+		int result = 0;
+		
+		if(n==1) {
+		    result = dao.recUpdateCommentCount(commentvo.getParentSeq());
+		}
+		
+		return result;
+	}
+
+	// =====  댓글내용 보여주기 =====
+		@Override
+		public List<CommentVO> recListComment(String seq) {
+			List<CommentVO> list = dao.recListComment(seq);
+			return list;
 		}
 
 }

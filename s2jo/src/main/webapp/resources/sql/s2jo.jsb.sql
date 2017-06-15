@@ -60,16 +60,6 @@ from final_recommendBoard;
 delete from final_recommendBoard;
 commit;
 
-create table test_recommendBoard
-(seq           number                not null   -- 글번호
-,userid        varchar2(20)          not null   -- 사용자ID
-,name          Nvarchar2(20)         not null   -- 글쓴이
-,subject       Nvarchar2(200)        not null   -- 글제목
-,content       Nvarchar2(2000)       not null   -- 글내용    -- clob
-,pw            varchar2(20)          not null   -- 글암호
-,readCount     number default 0      not null   -- 글조회수
-,regDate       date default sysdate  not null   -- 글쓴시간
-);
 
 
 create table final_recommendComment

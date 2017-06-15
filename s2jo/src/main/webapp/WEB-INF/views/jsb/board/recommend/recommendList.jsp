@@ -231,7 +231,7 @@
 	
 	
 	<div style="margin-top: 20px;">
-		<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/list.action'">글목록</button>&nbsp;
+		<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendList.action'">글목록</button>&nbsp;
 		<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendAdd.action'">글쓰기</button>
 	</div>
 	

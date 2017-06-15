@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.s2jo.khx.common.FileManager;
 import com.s2jo.khx.model.jsb.BoardVO;
+import com.s2jo.khx.model.jsb.CommentVO;
 import com.s2jo.khx.service.jsb.JsbService;
 
 
@@ -120,9 +121,9 @@ public class JsbController {
 	    	
 	    	req.setAttribute("boardvo", boardvo);
 	    	
-	    	/*// ===== #89. 댓글 내용 가져오기 ======
-	    	List<CommentVO> commentList = service.listComment(seq);
-	    	req.setAttribute("commentList", commentList); */
+	    	/*  댓글 내용 가져오기 ======*/
+	    	List<CommentVO> commentList = service.recListComment(seq);
+	    	req.setAttribute("commentList", commentList); 
 	    	
 	    	return "jsb/board/recommend/recommendView.tiles";
 	    	// /Board/src/main/webapp/WEB-INF/views2/board/view.jsp 파일을 생성한다.
@@ -218,7 +219,59 @@ public class JsbController {
 	    	return "jsb/board/recommend/recommendEditEnd.tiles";
 	    	// /Board/src/main/webapp/WEB-INF/views2/board/editEnd.jsp 파일을 생성한다.
 	    } 
+	    
+	    //  글삭제 페이지 완료하기 =====
+	    @RequestMapping(value="/jsb/recommendDel.action", method={RequestMethod.POST})
+	    public String delEnd(HttpServletRequest req) 
+	    	throws Throwable { 
+	    	
+	    	String seq = req.getParameter("seq");
+
+	    	/*
+	    	 글삭제를 하려면 원본글의 암호와 삭제시 입력해주는 암호가 일치할때만 
+	    	 삭제가 가능하도록 한다.
+	    	 서비스단에서 글삭제를 처리한 결과를 int 타입으로 받아오겠다. 
+	    	 */
+	    	HashMap<String, String> map = new HashMap<String, String>();
+	    	map.put("seq", seq);
+
+	    	
+	    	
+	    	int n = service.recommendDel(map);
+	    	// 넘겨받은 값이 1이면 글삭제 성공,
+	    	// 넘겨받은 값이 0이면 글삭제 실패(암호가 틀리므로).
+	    	
+	    	// n(글삭제 성공 또는 실패)값을 request 영역에 저장시켜서 view 단 페이지로 넘긴다.
+	    	req.setAttribute("n", n);
+	    	
+	    	return "jsb/board/recommend/recommendDelEnd.tiles";
+	    	// /Board/src/main/webapp/WEB-INF/views2/board/delEnd.jsp 파일을 생성한다.
+	    }    
 	 
+	    
+	 // ===== 댓글쓰기  =====
+	    @RequestMapping(value="/jsb/recAddComment.action", method={RequestMethod.GET})
+	    public String requireLogin_addComment(HttpServletRequest req, HttpServletResponse res, CommentVO commentvo) 
+	    	throws Throwable { 
+	    	
+   	
+	    	int result = service.recAddComment(commentvo); 
+	    	
+	    	if(result != 0) {
+	    		// 댓글쓰기와 원게시물(spring_tblBoard 테이블)에 댓글의 갯수(1씩 증가) 증가가 모두 성공했다라면
+	    		req.setAttribute("msg", "댓글쓰기 완료!!");
+	    	}
+	    	else {
+	    		// 댓글쓰기를 실패 or 댓글의 갯수(1씩 증가) 증가가 실패했다라면
+	    		req.setAttribute("msg", "댓글쓰기 실패!!");
+	    	}
+	    	
+	    	String seq = commentvo.getParentSeq(); // 댓글에 대한 원게시물 글번호
+	    	req.setAttribute("seq", seq);
+	    	
+	    	return "jsb/board/recommend/recAddCommentEnd.tiles";
+	    	// /Board/src/main/webapp/WEB-INF/views2/board/addCommentEnd.jsp 파일을 생성한다.
+	    }
 	 
 	
 }
