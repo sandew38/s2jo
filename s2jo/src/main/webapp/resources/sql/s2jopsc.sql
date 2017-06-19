@@ -63,11 +63,6 @@ values( 1, 102, 380);
 select *
 from final_traininfo;
 
-select case when traintype = 1 then 'KHX' 
-      else '무궁화' end
-from final_traininfo;
-
-
 commit;
 
 -- drop table final_runinfo;
@@ -430,7 +425,7 @@ from final_runinfo;
 CREATE TABLE final_seat (
 	seatseq VARCHAR2(20) NOT NULL, /* 좌석시퀀스 */
 	runinfoseq NUMBER NOT NULL, /* 운행코드번호 */
-	classno VARCHAR2(20) NOT NULL, /* 호차 ( 특실 : 1~3호차  일반실 : 4~8호차)*/
+	classno VARCHAR2(20) NOT NULL, /* 호차 */
 	seatno VARCHAR2(20) NOT NULL /* 좌석번호 */
 );
 
@@ -438,7 +433,7 @@ COMMENT ON COLUMN final_seat.seatseq IS '좌석시퀀스';
 
 COMMENT ON COLUMN final_seat.runinfoseq IS '운행코드번호';
 
-COMMENT ON COLUMN final_seat.classno IS '호차번호 ( 특실 : 1~3호차  일반실 : 4~8호차) ';
+COMMENT ON COLUMN final_seat.classno IS '호차번호';
 
 COMMENT ON COLUMN final_seat.seatno IS '좌석번호';
 
@@ -518,7 +513,8 @@ CREATE TABLE final_ticketdetail (
 	seatseq VARCHAR2(20) NOT NULL, /* 좌석시퀀스 */
 	orderstatus VARCHAR2(20) NOT NULL /* 예약여부 */
 );
-
+select *
+from final_ticketdetail;
 COMMENT ON COLUMN final_ticketdetail.ticketno IS '좌석이 선택가능한 지 여기서 알 수 있음
 기차코드번호_운행코드번호_날짜 (K_1h_1_20170609)';
 
@@ -576,30 +572,6 @@ ALTER TABLE final_ticketdetail
     
 
 
-/* 비회원로그인 */
-CREATE TABLE final_nonmember (
-	nonno VARCHAR2(20) NOT NULL, /* 비회원번호 */
-	nhp VARCHAR2(20) NOT NULL, /* 핸드폰번호 */
-	npwd VARCHAR2(4) NOT NULL, /* 임의비밀번호 */
-	status NUMBER(1) DEFAULT 1 /* 가입상태 */
-);
-
-COMMENT ON COLUMN final_nonmember.nonno IS 'non-member-number ( 비회원번호 )';
-
-COMMENT ON COLUMN final_nonmember.nhp IS '비회원가입용 핸드폰번호 11자리 입력';
-
-COMMENT ON COLUMN final_nonmember.npwd IS '비회원 비밀번호 숫자 4자리,문자1개';
-
-COMMENT ON COLUMN final_nonmember.status IS '가입상태 - 체크키 constraint CK_s2jo_member_status check( status in (0,1) )
-0이면 회원탈퇴, 1이면 회원가입상태';
-
-ALTER TABLE final_nonmember
-	ADD
-		CONSTRAINT PK_final_nonmember
-		PRIMARY KEY (
-			nonno
-		);
-    
     
 /* 티켓개요 */
 CREATE TABLE final_ticketsummary (
@@ -866,3 +838,156 @@ select DISTINCT(departure)
 from final_runinfo;
 
 
+-------------------------------------------------------------------------------------------
+
+/* 비회원로그인 */
+CREATE TABLE final_nonmember (
+	nonno VARCHAR2(20) NOT NULL, /* 비회원번호 */
+	nhp VARCHAR2(20) NOT NULL, /* 핸드폰번호 */
+	npwd VARCHAR2(4) NOT NULL, /* 임의비밀번호 */
+	status NUMBER(1) DEFAULT 1 /* 가입상태 */
+);
+
+COMMENT ON COLUMN final_nonmember.nonno IS 'non-member-number ( 비회원번호 )';
+
+COMMENT ON COLUMN final_nonmember.nhp IS '비회원가입용 핸드폰번호 11자리 입력';
+
+COMMENT ON COLUMN final_nonmember.npwd IS '비회원 비밀번호 숫자 4자리,문자1개';
+
+COMMENT ON COLUMN final_nonmember.status IS '가입상태 - 체크키 constraint CK_s2jo_member_status check( status in (0,1) )
+0이면 회원탈퇴, 1이면 회원가입상태';
+
+ALTER TABLE final_nonmember
+	ADD
+		CONSTRAINT PK_final_nonmember
+		PRIMARY KEY (
+			nonno
+		);
+select *
+from final_nonmember;
+
+commit;
+--** 비회원 로그인여부 확인
+ 	  select case( select count(*)
+	               from final_nonmember
+	               where nhp = '01052498336' )
+	         when 1 then 1
+	         else( case(select count(*) 
+	                    from final_nonmember
+	                    where nhp = '01052498336')
+	               when 1 then 0
+	               else -1
+	               end
+	             )
+	         end as NONLOGINCHECK
+	  from dual;
+
+
+
+ select nonno, nhp, npwd, status
+	   from final_nonmember
+	   where status = 1 and nhp = '01052498336';
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------
+    
+/* 회원가입 */
+CREATE TABLE final_member (
+	userid VARCHAR2(20) NOT NULL, /* 회원ID */
+	name VARCHAR2(20) NOT NULL, /* 회원명 */
+	pwd VARCHAR2(15) NOT NULL, /* 비밀번호 */
+	email VARCHAR2(50) NOT NULL, /* 이메일주소 */
+	hp VARCHAR2(11), /* 핸드폰번호 */
+	post VARCHAR2(20), /* 우편번호 */
+	addr1 VARCHAR2(100), /* 집주소 */
+	addr2 VARCHAR2(100), /* 상세집주소 */
+	joindate DATE DEFAULT sysdate, /* 가입날짜 */
+	status NUMBER(1) DEFAULT 1, /* 가입상태 */
+	birthday VARCHAR2(30) NOT NULL, /* 생년월일 */
+	gender NUMBER(1) /* 성별 */
+);
+
+insert into final_member (userid, name, pwd, email,joindate, status, birthday)
+values('dnjswp94','유원제','qwer1234$','dnjswp94@naver.com', default,default,'940916');
+
+select *
+from final_member;
+update final_member set gender = '1'
+where userid in 'jjanson91';
+
+
+commit;
+
+COMMENT ON TABLE final_member IS '회원가입 테이블//모든 정보의 기본!';
+
+COMMENT ON COLUMN final_member.userid IS '회원ID
+';
+
+COMMENT ON COLUMN final_member.name IS '회원명';
+
+COMMENT ON COLUMN final_member.pwd IS '비밀번호';
+
+COMMENT ON COLUMN final_member.email IS '이메일주소';
+
+COMMENT ON COLUMN final_member.hp IS '핸드폰번호 (유니크 키)';
+
+COMMENT ON COLUMN final_member.post IS '우편번호';
+
+COMMENT ON COLUMN final_member.addr1 IS '주소';
+
+COMMENT ON COLUMN final_member.addr2 IS '상세주소';
+
+COMMENT ON COLUMN final_member.joindate IS '가입날짜';
+
+COMMENT ON COLUMN final_member.status IS '가입상태 - 체크키 constraint CK_s2jo_member_status check( status in (0,1) )
+0이면 회원탈퇴, 1이면 회원가입상태';
+
+COMMENT ON COLUMN final_member.birthday IS '생년월일';
+
+COMMENT ON COLUMN final_member.gender IS '성별 - 체크키 constraint CK_s2jo_member_gender check( status in (1,2) )
+1이면 남
+2이면 여';
+
+select *
+from final_member;
+
+
+ALTER TABLE final_member
+	ADD
+		CONSTRAINT PK_final_member
+		PRIMARY KEY (
+			userid
+		);
+    
+select * from user_tables;
+
+--**정회원 로그인 여부 확인
+ select case( select count(*)
+	               from final_member
+	               where userid = 'jjanson91' )
+	         when 1 then 1
+	         else( case(select count(*) 
+	                    from final_member
+	                    where userid = 'jjanson91')
+	               when 1 then 0
+	               else -1
+	               end
+	             )
+	         end as LOGINCHECK
+	  from dual;
+    
+    select *
+    from final_member;
+    	   select nonno, nhp, npwd, status
+	   from final_nonmember
+	   where status = 1 and nhp = '01052498336';
+
+--정회원 로그인 완료요청!
+select userid, name, pwd, email, hp, post, addr1, addr2, to_char(joindate, 'yyyy-mm-dd') as joindate
+      , status, birthday, gender
+	   from final_member
+	   where status = 1 and userid = 'jjanson91';

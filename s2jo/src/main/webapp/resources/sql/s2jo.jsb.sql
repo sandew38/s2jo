@@ -3,6 +3,11 @@ show user;
 select *
 from tab;
 
+select *
+from final_member;
+
+ insert into final_member(userid, name,pwd,email,birthday)
+values('asd','asd','asd123!@#','wltmdqo12@naver.com',sysdate); 
 --추천게시판
 create table final_recommendBoard
 (seq           number                not null   -- 글번호
@@ -48,6 +53,12 @@ nomaxvalue
 nominvalue
 nocycle
 nocache;
+
+select *
+from final_recommendBoard;
+
+delete from final_recommendBoard;
+commit;
 
 
 

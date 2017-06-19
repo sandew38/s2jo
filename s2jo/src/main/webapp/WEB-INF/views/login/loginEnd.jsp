@@ -6,7 +6,7 @@
 <script type="text/javascript">
 		<c:if test="${n == 1 && empty url}">
 			alert("로그인 성공 !!");
-			location.href="<%= request.getContextPath() %>/index.action";       
+			location.href="<%= request.getContextPath()%>";       
 		</c:if>
 		
 		<c:if test="${n == 1 && not empty url}">
@@ -24,6 +24,6 @@
 			alert("회원가입 부터 먼저 하세요 !!");
 			javascript:history.back();
 			// 이전 페이지로 이동
-	</c:if>	
+		</c:if>	
 </script>
     

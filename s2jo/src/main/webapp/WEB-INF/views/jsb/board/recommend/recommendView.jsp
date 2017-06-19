@@ -27,6 +27,16 @@
     
 </script>
 
+<script type="text/javascript">
+	function goDelete() {
+		var delFrm = document.delFrm;
+		delFrm.action = "/khx/jsb/recommendDel.action";
+		delFrm.method = "post";
+		delFrm.submit();
+	}
+</script>
+
+
 <div style="padding-left: 10%; border: solid 0px red;">
 	<h1>글내용보기</h1>
 	
@@ -34,6 +44,7 @@
 		<tr>
 			<th>글번호</th>
 			<td>${boardvo.seq}</td>
+			
 		</tr>
 		<tr>
 			<th>성명</th>
@@ -72,12 +83,13 @@
 		</tr>
 		
 	</table>
-	
+		<form name="delFrm">    
+			<input type="hidden"   name="seq" value="${boardvo.seq}" />
+		</form>
 	<br/>
-	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/list.action'">목록보기</button>
-	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/edit.action?seq=${boardvo.seq}'">수정</button>
-	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/del.action?seq=${boardvo.seq}'">삭제</button>
-		
+	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendList.action'">목록보기</button>
+	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/jsb/recommendEdit.action?seq=${boardvo.seq}'">수정</button>
+	<button type="button" onClick="goDelete();">삭제</button>
 		
 	<br/>
 	<br/>
@@ -86,10 +98,10 @@
 	<button type="button" onClick="javascript:location.href='<%= request.getContextPath() %>/add.action?fk_seq=${boardvo.seq}&groupno=${boardvo.groupno}&depthno=${boardvo.depthno}'">답변글쓰기</button> 
 	<br/>
 	
-	<!-- ===== #83. 댓글쓰기 폼 추가 ===== -->
-	<form name="addWriteFrm" action="<%= request.getContextPath() %>/addComment.action" method="get">     
-		     <input type="hidden" name="userid" value="${sessionScope.loginuser.userid}" readonly />
-		 성명 : <input type="text" name="name" value="${sessionScope.loginuser.name}" class="short" readonly/>
+	<!--  댓글쓰기 폼 추가 ===== -->
+	<form name="addWriteFrm" action="<%= request.getContextPath() %>/jsb/recAddComment.action" method="get">     
+		     <input type="hidden" name="userid" value="asd" readonly />
+		 성명 : <input type="text" name="name" value="asd" class="short" readonly/>
 	     댓글 : <input type="text" name="content" class="long" />
 	    
 	    <!-- 댓글에 달리는 원게시물 글번호(즉, 댓글의 부모글) -->
@@ -103,6 +115,11 @@
 	<!-- ===== #93. 댓글 내용 보여주기 ===== -->
 	<table id="table2">
 		<c:forEach var="commentvo" items="${commentList}">
+			<tr>
+				<td>이름</td>
+				<td>내용</td>
+				<td>작성일자</td>
+			</tr>
 			<tr>
 				<td>${commentvo.name}</td>
 				<td>${commentvo.content}</td>

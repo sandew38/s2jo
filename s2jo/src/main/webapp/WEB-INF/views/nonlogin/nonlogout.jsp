@@ -5,7 +5,7 @@
 <script type="text/javascript">
 	<c:if test="${sessionScope.nonloginuser == null}">
 		alert("로그아웃 되었습니다.");
-		location.href="<%= request.getContextPath() %>/index.action";
+		location.href="<%= request.getContextPath() %>";
 	</c:if>
 </script>
     

@@ -8,14 +8,13 @@
 
 
 	
-	<!--  
-	           #58. 글쓰기 부분을 주석처리한 후에 아래처럼 한다.
-	--> 
+	<!-- 글추가하기(초기) --> 
 	<insert id="recommendAdd" parameterType="com.s2jo.khx.model.jsb.BoardVO">
         insert into final_recommendBoard(seq, userid, name, subject, content, pw, readCount, regDate, status, groupno)
-		values(final_recommendBoard_Seq.nextval, 'asd', 'asd', 'asd', #{content}, 'asd', default, default, default, 1) 
+		values(final_recommendBoard_Seq.nextval, 'asd', 'asd', '#{subject}', #{content}, 'not_use', default, default, default, 1) 
 	</insert>
 	
+	<!-- 추천글리스트(초기) -->
 	<select id="recommendBoardList" resultType="com.s2jo.khx.model.jsb.BoardVO">
 		select seq, userid, name, subject, content, readCount 
 		     , to_char(regDate, 'yyyy-mm-dd hh24:mi:ss') as regDate
@@ -24,5 +23,54 @@
 		order by seq desc
 	</select>
 	
+	<!--  글 1개를 볼때 조회수(readCount) 1증가 시키기 ===== -->
+	<update id="setRecAddReadCount" parameterType="String">
+		update final_recommendBoard set readCount = readCount + 1 
+		where seq = #{seq}
+	</update>
 	
+	<!-- 글 1개 보여주기(최초) -->
+	<select id="getRecommendView" parameterType="String" resultType="com.s2jo.khx.model.jsb.BoardVO">
+		select seq, userid, name, subject, content, readCount 
+		     , to_char(regDate, 'yyyy-mm-dd hh24:mi:ss') as regDate
+		from final_recommendBoard
+		where status = 1 and seq = #{seq}
+	</select>
+	
+	<!-- =====  글 1개 수정하기 ===== -->
+	<update id="recUpdateContent" parameterType="java.util.HashMap">
+		update final_recommendBoard set subject = #{subject}
+		                         , content = #{content}
+	    where seq = #{seq}
+	</update>
+	
+	<!-- =====  글 1개 삭제하기 ===== -->
+	<update id="recDelContent" parameterType="java.util.HashMap">
+		update final_recommendBoard set status = 0
+	    where seq = #{seq}
+	</update>
+		
+	<!-- =====  댓글쓰기 ===== -->
+    <insert id="recAddComment" parameterType="com.s2jo.khx.model.jsb.CommentVO">
+    	insert into final_recommendComment(seq, userid, name, content, regDate, parentSeq, status)
+        values(final_recComment_Seq.nextval, #{userid}, #{name}, #{content}, default, #{parentSeq}, default)
+    </insert>
+    
+    
+     <!-- 댓글쓰기 이후에  commentCount 컬럼값 1증가 하기 ===== -->
+    <update id="recUpdateCommentCount" parameterType="String">
+    	update final_recommendBoard set commentCount = commentCount + 1 
+    	where seq = #{parentSeq}
+    </update>
+    
+    <!-- ===== 댓글내용 보여주기 ===== -->
+	<select id="recListComment" parameterType="String" resultType="com.s2jo.khx.model.jsb.CommentVO"> 
+		select seq, userid, name, content 
+		     , to_char(regDate, 'yyyy-mm-dd hh24:mi:ss') as regDate
+		     , parentSeq, status  
+		from final_recommendComment
+		where status = 1 and parentSeq = #{parentSeq}
+		order by seq desc
+	</select> 
+    
 </mapper>

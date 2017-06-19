@@ -15,28 +15,43 @@ public class khxpscNonMemberDAO {
 
 	//비회원정보 가져오기
 	public int nonloginEnd(HashMap<String, String> map) {
-		int n = sqlsession.selectOne("board.nonloginEnd", map);
+		int n = sqlsession.selectOne("pscmember.nonloginEnd", map);
+									/*xml이름.xml에서 불러다 쓸 ID*/
 		return n;
 	}
-		
+	
 	//로그인성공한 비회원 정보가져오기
-	public khxpscNonMemberVO getnonLoginMember(String nhp) {
-		khxpscNonMemberVO nonloginuser = sqlsession.selectOne("board.getnonLoginMember", nhp);
+	public khxpscNonMemberVO getNonLoginEnd(String nhp) {
+		khxpscNonMemberVO nonloginuser = sqlsession.selectOne("pscmember.getNonLoginEnd", nhp);
 		return nonloginuser;
 	}
 
-/*
-	//회원정보 가져오기
-	public int nonloginEnd(HashMap<String, String> map) {
-		int n = sqlsession.selectOne("board.nonloginEnd", map);
+	//정회원 정보 가져오기!
+	public int loginEnd(HashMap<String, String> map) {
+		int n = sqlsession.selectOne("pscmember.loginEnd", map);
+									//xml이름.xml에서 불러다 쓸 ID
 		return n;
 	}
-		
-	//로그인성공한 회원 정보가져오기
-	public khxpscNonMemberVO getLoginMember(String nhp) {
-		khxpscNonMemberVO loginuser = sqlsession.selectOne("board.getLoginMember", nhp);
+
+	//정회원 로그인 완료요청 !
+	public khxpscMemberVO getLoginEnd(String userid) {
+		khxpscMemberVO loginuser = sqlsession.selectOne("pscmember.getLoginEnd", userid);
 		return loginuser;
 	}
-*/
+
 
 }//end of public class khxpscNonMemberDAO {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
