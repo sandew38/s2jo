@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -33,14 +34,21 @@ public class HjsController {
 	@Autowired
 	private HjsService service;
 	
+	
 	// ===== 관광지 Api 다루는 클래스 의존객체 주입하기(DI: Dependency Injection) =====
 	@Autowired
 	private ApiExplorer apiExplorer;
+	
+	
 	
 	// ==== #js1. 기차역정보 메인 페이지 요청 ====
 	@RequestMapping(value="/hjs/stationInfo.action", method={RequestMethod.GET})
 	
 	public String main(HttpServletRequest req){
+		
+		List<String> stationList = service.getStationList();
+    	
+    	req.setAttribute("stationList", stationList);
 		
 		return "hjs/stationInfo.tiles";
 		// /s2jo/src/main/webapp/WEB-INF/views/hjs/stationInfo.jsp 파일을 생성한다
@@ -48,39 +56,38 @@ public class HjsController {
 	}// end of public String main(HttpServletRequest req) ----------------
 	
 	
-	// >> Ajax
+	
+	// >>> Ajax
 	// ==== #js2. 기차역(시/도)별 관광정보 리스트 요청 ====
-	@RequestMapping(value="/hjs/sidoInfo.action", method={RequestMethod.POST})
+	@RequestMapping(value="/hjs/tourList.action", method={RequestMethod.POST})
 	@ResponseBody
-	public HashMap<String, String> sidoInfo(HttpServletRequest req) throws Exception{
+	
+	public ArrayList<HashMap<String, String>> tourList(HttpServletRequest req) throws Exception{
 		
-		String SIDO = req.getParameter("SIDO");   // form_data 어떻게 불러오는지?
+		String SIDO = req.getParameter("SIDO");   // form_data 
+		String GUGUN = req.getParameter("GUGUN"); 
 		
-		System.out.println("확인 ==> " + SIDO);	// 서울특별시 나옴.
-		apiExplorer.tourInfo(SIDO);
+		ArrayList<HashMap<String, String>> list = apiExplorer.tourList(SIDO, GUGUN); // 시/도, 군/구 별 관광지 목록 정보 담은 list
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("SIDO", SIDO);
+		return list;		
+	}// end of public String main(HttpServletRequest req) ----------------
+
+	
+	
+	// >>> Ajax
+	// ==== #js3. 관광지별 상세 관광정보 요청 ====
+	@RequestMapping(value="/hjs/tourDetail.action", method={RequestMethod.POST})
+	@ResponseBody
+	
+	public HashMap<String, String> tourDetail(HttpServletRequest req) throws Exception{
 		
+		String SIDO = req.getParameter("SIDO");   // form_data 
+		String GUGUN = req.getParameter("GUGUN"); 
+		String RES_NM = req.getParameter("RES_NM"); 
+
+		HashMap<String, String> map = apiExplorer.tourDetail(SIDO, GUGUN, RES_NM); // 관광지상세 정보 담은 list
 		
-		// ==========================================================
-/*		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("SIDO", SIDO);
-		map.put("thumbnailFileName", thumbnailFileName);
-		
-		
-		String imgFilename = service.getLargeImgFilename(map); 
-		// spring_productimage 테이블에서 
-		// 제품번호(fk_prodseq), 썸네일파일명(thumbnailFileName)에 해당하는 imagefilename 컬럼의 값(201706110056542344396781698764.jpg) 가져오기 
-		
-		HashMap<String, String> returnmap = new HashMap<String, String>(); 
-		
-		returnmap.put("IMGFILENAME", imgFilename);
-		
-		*/
-		return map;
-		
+		return map;		
 	}// end of public String main(HttpServletRequest req) ----------------
 	
 	
